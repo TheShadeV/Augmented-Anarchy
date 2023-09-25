@@ -1,0 +1,11 @@
+<?php
+    $html = file_get_contents('templates/index.tpl');
+    $html = str_replace('##SIKER##','',$html);
+    echo $html;
+
+
+
+
+
+
+?>
