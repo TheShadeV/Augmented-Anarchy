@@ -60,6 +60,8 @@ public class Player : MonoBehaviour
             if (movement.x != 0 && movement.y != 0 || movement.x != 0 || movement.y != 0)
             {
                 SwitchIdle(true);
+                bool flipped = movement.x < 0;
+                this.transform.rotation = Quaternion.Euler(0, flipped ? 180 : 0, 0);
                 Movement.Move(movement);
             }
             else
@@ -67,8 +69,8 @@ public class Player : MonoBehaviour
                 SwitchIdle(false);
             }
 
-            anim.SetFloat("axisX", movement.x);
-            anim.SetFloat("axisY", movement.y);
+            anim.SetFloat("AxisX", movement.x);
+            anim.SetFloat("AxisY", movement.y);
 
             if (Input.GetMouseButtonDown(0))
             {                
@@ -78,8 +80,6 @@ public class Player : MonoBehaviour
                     isFreeze = true;
                 }
             }
-            
-            //Get the certain pressed key
 
         }
         else

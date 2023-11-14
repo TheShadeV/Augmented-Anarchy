@@ -5,9 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Someone
-  - Player's Lase
-  - PlayerAttack
   - DeepMap
+  - Terrain Objects
   layers:
   - Default
   - TransparentFX
