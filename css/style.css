@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#login_form{
+    float: right;
+}
+
+.felso {
+    padding: 15px;
+    background-color: rgb(177,177,177);
+    height: 2.5em;
+}
+
+.tartalom{
+    clear:both;
+}
+
+#regist {
+    width: 250px;
+    margin: 0 auto;
+    background-color: palegoldenrod;
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 10px;
+}
+
+p#warning {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
