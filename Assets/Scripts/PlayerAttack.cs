@@ -25,11 +25,12 @@ public class PlayerAttack : MonoBehaviour
 
     private void Start()
     {
-        this.projectile = Resources.Load("Laser") as GameObject;
+        this.projectile = Resources.Load<GameObject>("Prefabs/ShockArrow");
     }
 
     public float Attack(Vector3 playerPosition)
     {
+        System.Console.WriteLine(this.projectile);
         if(timer <= 0)
         {
             Vector2 menuPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -39,7 +40,7 @@ public class PlayerAttack : MonoBehaviour
             laser.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             laser.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            laser.GetComponent<LaserMechanic>().damage = Random.Range(minDamage, maxDamage);
+            laser.GetComponent<ProjectileMechanic>().damage = Random.Range(minDamage, maxDamage);
             timer = LaserDelay;
 
             return delay;
