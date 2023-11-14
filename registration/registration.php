@@ -9,14 +9,16 @@
 
         $leker = lekerdezes($kapcsolat);
         $error = '';
-
         while ($sor = mysqli_fetch_array($leker)) {
             if ($_POST['fnev'] == $sor['nev']){
-                $error .= 'Már létezik ilyen nevű felhasználó.';
+                $error .= 'Már létezik ilyen nevű felhasználó!';
             }
             if ($_POST['email'] == $sor['email']){
-                $error .= 'Már létezik felhasználó ilyen e-mail címmel.';
+                $error .= 'Már létezik felhasználó ilyen e-mail címmel!';
             }
+        }
+        if ($_POST['jelszo'] !== $_POST['jelszo_2']){
+            $error .= 'Nem ugyanaz a két jelszó!';
         }
         if ($error != ''){
             $html = str_replace("##ERROR##",$error,$html);
@@ -26,14 +28,9 @@
             if ($update){
                 //header("Location: index.php");
                 $html = file_get_contents("templates/index.tpl");
-                $html = str_replace("##SIKER##", "Sikeres regisztráció", $html);
+                $html = str_replace("##SIKER##", "Sikeres regisztráció!", $html);
             }
         }
     }
     echo $html;
-
-
-
-
-
 ?>
