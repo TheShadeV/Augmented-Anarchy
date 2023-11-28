@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -49,6 +50,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
         Console.WriteLine(isFreeze);
 
         if (!isFreeze)
