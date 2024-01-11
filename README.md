@@ -1,2 +1,2 @@
-"# Augmented Anarchia"
-gira connection testing
+"# Augmented Anarchy"
+

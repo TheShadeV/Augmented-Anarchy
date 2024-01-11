@@ -7,6 +7,7 @@ TagManager:
   - Someone
   - DeepMap
   - Terrain Objects
+  - ExitArea
   layers:
   - Default
   - TransparentFX
@@ -41,6 +42,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Deep
+    uniqueID: 1636238337
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 2235717143
+    locked: 0
+  - name: Objects
+    uniqueID: 4246386801
+    locked: 0
+  - name: Exit
+    uniqueID: 3226101739
+    locked: 0
+  - name: Player
+    uniqueID: 3148337191
     locked: 0

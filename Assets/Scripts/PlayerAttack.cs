@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,45 +7,41 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public GameObject projectile;
-    public float minDamage;
-    public float maxDamage;
-    private float projectileSpeed = 3.5f;
 
-    private float timer = 0f;
-    private float LaserDelay = .5f;
+    private Dictionary<string, GameObject> projectileList = new Dictionary<string, GameObject>();
 
-    private float delay = 0.1f;
+    private Vector2 menuPos;
+    private Vector2 direction;
+    private Vector2 projPos;
+    private float angle;
+    private GameObject proj;
+
     private void Update()
     {
-        if (timer > 0)
-        {
-            timer -= Time.deltaTime;
-        }
+        
     }
 
     private void Start()
     {
-        this.projectile = Resources.Load<GameObject>("Prefabs/ShockArrow");
+        projectileList.Add("ShockArrow", Resources.Load<GameObject>("Prefabs/ShockArrow"));
+        projectileList.Add("ShockRoller", Resources.Load<GameObject>("Prefabs/ShockRoller"));
     }
 
-    public float Attack(Vector3 playerPosition)
+    public List<float> Attack(Vector3 playerPosition, string prefabName)
     {
-        System.Console.WriteLine(this.projectile);
-        if(timer <= 0)
-        {
-            Vector2 menuPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 direction = (menuPos - (Vector2)playerPosition).normalized;
-            Vector2 ProjPos = playerPosition + (Vector3)direction * 0.2f;
-            GameObject laser = Instantiate(projectile, ProjPos, Quaternion.identity);
-            laser.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            laser.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            laser.GetComponent<ProjectileMechanic>().damage = Random.Range(minDamage, maxDamage);
-            timer = LaserDelay;
+        System.Console.WriteLine(prefabName);
+        GameObject tempProjectile = projectileList[prefabName];
+        ProjectileMechanic tempProjectileMechanic = tempProjectile.GetComponent<ProjectileMechanic>();
 
-            return delay;
-        }
-        return 0;
+        menuPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        direction = (menuPos - (Vector2)playerPosition).normalized;
+        projPos = playerPosition + (Vector3)direction * 0.2f;
+        proj = Instantiate(tempProjectile, projPos, Quaternion.identity);
+        proj.GetComponent<Rigidbody2D>().velocity = direction * tempProjectileMechanic.speed;
+        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        proj.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        proj.GetComponent<ProjectileMechanic>().damage = tempProjectileMechanic.damage;
+
+        return new List<float> { tempProjectileMechanic.freezeTime, tempProjectileMechanic.cooldown } ;
     }
 }

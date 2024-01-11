@@ -1,5 +1,7 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -8,20 +10,33 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-    public PlayerMovement(Rigidbody2D rb)
-    {
-        this.rb = rb;
+        rb = GetComponent<Rigidbody2D>();
     }
     // Update is called once per frame
     void Update()
     {
         
     }
-    public void Move(Vector2 movement)
+    public void Walk(Vector2 movement)
     {
-        rb.MovePosition(rb.position + movement * Time.fixedDeltaTime);
+        float moveSpeed = 3f;
+        rb.velocity = movement * moveSpeed;
     }
+    public void Run(Vector2 movement)
+    {
+        float moveSpeed = 6f;
+        rb.velocity = movement * moveSpeed;
+    }
+    public void Sprint(Vector2 movement)
+    {
+        float moveSpeed = 10f;
+        rb.velocity = movement * moveSpeed;
+    }
+    public void Dash(Vector2 movement)
+    {
+        float dashAmount = 7f;
+        rb.MovePosition(rb.position + movement * dashAmount);
+    }
+
 
 }
