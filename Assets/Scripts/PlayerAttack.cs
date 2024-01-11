@@ -9,7 +9,7 @@ public class PlayerAttack : MonoBehaviour
     public GameObject projectile;
     public float minDamage;
     public float maxDamage;
-    private float projectileSpeed = 3.5f;
+    private float projectileSpeed = 30f;
 
     private float timer = 0f;
     private float LaserDelay = .5f;

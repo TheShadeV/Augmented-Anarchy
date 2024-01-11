@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ProjectileMechanic : MonoBehaviour
 {
     public float damage;
-    private float range = .5f;
+    private float range = 10f;
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("szar");
@@ -16,7 +15,7 @@ public class ProjectileMechanic : MonoBehaviour
             {
                 other.GetComponent<EnemyReceiveDamage>().DealDamage(damage);
             }
-            DestroyObject();
+            Destroy(gameObject);
         }
     }
     private void FixedUpdate()
@@ -24,14 +23,7 @@ public class ProjectileMechanic : MonoBehaviour
         range -= Time.deltaTime;
         if (range <= 0)
         {
-            DestroyObject();
+            Destroy(gameObject);
         }
-    }
-
-    private void DestroyObject()
-    {
-        GameObject effect = Instantiate(Resources.Load("Prefabs/ShockArrow_Explode"), transform.position, Quaternion.identity) as GameObject;
-        Destroy(effect, 0.2f);
-        Destroy(gameObject);
     }
 }
