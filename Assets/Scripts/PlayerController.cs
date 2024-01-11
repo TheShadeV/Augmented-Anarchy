@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public float freezeTime;
     private PlayerAttack Attack;
     private Transform PlayerPosition;
+    private PlayerMovement Movement;
 
     private void Start()
     {
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         Attack = GetComponent<PlayerAttack>();
         PlayerPosition = GetComponent<Transform>();
+        Movement = GetComponent<PlayerMovement>();
         isFreeze = false;
         freezeTime = 0.5f;
     }
@@ -31,7 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene("Pause");
         }
         Console.WriteLine(isFreeze);
 
@@ -82,32 +85,37 @@ public class PlayerController : MonoBehaviour
         anim.SetLayerWeight(0, Convert.ToInt32(!isRun));
 
     }
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.gameObject.tag == "ExitArea")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+    }
     private void FixedUpdate()
     {
         if (!isFreeze)
         {
             if (Input.GetKey(KeyCode.LeftShift)) //Sprint
             {
-                rb2d.velocity = moveInput * 10;
+                Movement.Sprint(moveInput);
             }
             else if (Input.GetKey(KeyCode.LeftAlt)) //Walk
             {
-                rb2d.velocity = moveInput * 3;
+                Movement.Walk(moveInput);
             }
             else //Run
             {
-                rb2d.velocity = moveInput * moveSpeed;
+                Movement.Run(moveInput);
             }
             if (isDashing)
             {
-                float dashAmount = 5f;
-                rb2d.MovePosition(rb2d.position + moveInput * dashAmount);
+                Movement.Dash(moveInput);
                 isDashing = false;
             }
         }
         else
         {
-            rb2d.velocity = moveInput *0;
             if (freezeTime <= 0 && isFreeze == true)
             {
                 isFreeze = false;

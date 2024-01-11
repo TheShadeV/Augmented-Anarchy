@@ -179,6 +179,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalHealth: 0
   health: 0
+  detectDist: 10
+  rangedAttackDistance: 6
 --- !u!60 &53177788
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -396,6 +398,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalHealth: 0
   health: 0
+  detectDist: 10
+  rangedAttackDistance: 6
 --- !u!60 &108338181
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -613,6 +617,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalHealth: 0
   health: 0
+  detectDist: 10
+  rangedAttackDistance: 6
 --- !u!60 &353700998
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -903,6 +909,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalHealth: 0
   health: 0
+  detectDist: 10
+  rangedAttackDistance: 6
 --- !u!60 &489688177
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1816,6 +1824,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalHealth: 0
   health: 0
+  detectDist: 10
+  rangedAttackDistance: 6
 --- !u!60 &544225861
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2893,6 +2903,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalHealth: 0
   health: 0
+  detectDist: 10
+  rangedAttackDistance: 6
 --- !u!60 &1151267628
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -3110,6 +3122,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalHealth: 0
   health: 0
+  detectDist: 10
+  rangedAttackDistance: 6
 --- !u!60 &1271517794
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -3333,9 +3347,10 @@ GameObject:
   - component: {fileID: 1514938562}
   - component: {fileID: 1514938566}
   - component: {fileID: 1514938567}
+  - component: {fileID: 1514938568}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3534,6 +3549,18 @@ MonoBehaviour:
   isDashing: 0
   isFreeze: 0
   freezeTime: 0
+--- !u!114 &1514938568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514938557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1beda7205b1f284495814a64f286989, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1621641434
 GameObject:
   m_ObjectHideFlags: 0
@@ -3614,7 +3641,7 @@ GameObject:
   - component: {fileID: 1636827814}
   - component: {fileID: 1636827813}
   - component: {fileID: 1636827817}
-  - component: {fileID: 1636827818}
+  - component: {fileID: 1636827820}
   - component: {fileID: 1636827819}
   m_Layer: 0
   m_Name: Slime
@@ -3784,20 +3811,6 @@ PolygonCollider2D:
       - {x: 0.040248215, y: 0.030767258}
       - {x: 0.040456697, y: 0.04017938}
   m_UseDelaunayMesh: 0
---- !u!114 &1636827818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1636827811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31f4c82f7fab36e4f81a4e252c8d7b68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalHealth: 0
-  health: 0
 --- !u!95 &1636827819
 Animator:
   serializedVersion: 5
@@ -3819,6 +3832,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1636827820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636827811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f4c82f7fab36e4f81a4e252c8d7b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalHealth: 0
+  health: 0
+  detectDist: 10
+  rangedAttackDistance: 6
 --- !u!1 &1706246774
 GameObject:
   m_ObjectHideFlags: 0
@@ -3831,8 +3860,8 @@ GameObject:
   - component: {fileID: 1706246779}
   - component: {fileID: 1706246778}
   - component: {fileID: 1706246777}
-  - component: {fileID: 1706246776}
   - component: {fileID: 1706246775}
+  - component: {fileID: 1706246781}
   m_Layer: 0
   m_Name: Slime (7)
   m_TagString: Someone
@@ -3861,20 +3890,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1706246776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1706246774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31f4c82f7fab36e4f81a4e252c8d7b68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalHealth: 0
-  health: 0
 --- !u!60 &1706246777
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -4036,6 +4051,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 461394828}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1706246781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706246774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f4c82f7fab36e4f81a4e252c8d7b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalHealth: 0
+  health: 0
+  detectDist: 10
+  rangedAttackDistance: 6
 --- !u!1 &1783255886
 GameObject:
   m_ObjectHideFlags: 0
@@ -4092,6 +4123,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalHealth: 0
   health: 0
+  detectDist: 10
+  rangedAttackDistance: 6
 --- !u!60 &1783255889
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -8199,6 +8232,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalHealth: 0
   health: 0
+  detectDist: 10
+  rangedAttackDistance: 6
 --- !u!60 &2029871573
 PolygonCollider2D:
   m_ObjectHideFlags: 0

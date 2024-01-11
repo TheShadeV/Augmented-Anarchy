@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         Attack = GetComponent<PlayerAttack>();
-        Movement = new PlayerMovement(rb);
+        //Movement = new PlayerMovement(rb);
         PlayerPosition = GetComponent<Transform>();
 
 
@@ -67,7 +67,8 @@ public class Player : MonoBehaviour
                 SwitchIdle(true);
                 bool flipped = movement.x < 0;
                 this.transform.rotation = Quaternion.Euler(0, flipped ? 180 : 0, 0);
-                Movement.Move(movement);
+                
+                //Movement.Move(movement);
             }
             else
             {

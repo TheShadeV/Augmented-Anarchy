@@ -11,9 +11,9 @@ public class ProjectileMechanic : MonoBehaviour
         Debug.Log("szar");
         if (other.name != "Player" && other.tag != "DeepMap")
         {
-            if(other.GetComponent<EnemyReceiveDamage>() != null)
+            if(other.GetComponent<EnemyController>() != null)
             {
-                other.GetComponent<EnemyReceiveDamage>().DealDamage(damage);
+                other.GetComponent<EnemyController>().DealDamage(damage);
             }
             Destroy(gameObject);
         }
