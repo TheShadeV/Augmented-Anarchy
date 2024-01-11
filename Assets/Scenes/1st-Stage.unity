@@ -3527,9 +3527,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6b3ae16a24e39245873440cd836d071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 0}
-  minDamage: 12
-  maxDamage: 25
 --- !u!114 &1514938567
 MonoBehaviour:
   m_ObjectHideFlags: 0

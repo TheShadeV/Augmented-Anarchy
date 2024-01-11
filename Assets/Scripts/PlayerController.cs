@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private PlayerAttack Attack;
     private Transform PlayerPosition;
     private PlayerMovement Movement;
+    private SortedList<string, float> spellTimers = new SortedList<string, float>();
 
     private void Start()
     {
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        updateCooldowns();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("Pause");
@@ -59,13 +61,62 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("ka");
-            freezeTime = Attack.Attack(PlayerPosition.position);
-            if (freezeTime > 0)
+            if (spellTimers.ContainsKey("ShockArrow"))
             {
-                isFreeze = true;
+                if (spellTimers["ShockArrow"] <= 0)
+                {
+                    List<float> temp = Attack.Attack(PlayerPosition.position, "ShockArrow");
+                    freezeTime = temp[0];
+                    spellTimers["ShockArrow"] = temp[1];
+                    Debug.Log(spellTimers["ShockArrow"]);
+                }
+                else
+                {
+                    Debug.Log(spellTimers["ShockArrow"]);
+                }
             }
+            else
+            {
+                List<float> temp = Attack.Attack(PlayerPosition.position, "ShockArrow");
+                freezeTime = temp[0];
+                spellTimers.Add("ShockArrow", temp[1]);
+
+                Debug.Log(spellTimers["ShockArrow"]);
+            }
+
+            isFreeze = true;
+            rb2d.velocity = Vector2.zero;
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if(spellTimers.ContainsKey("ShockRoller"))
+            {
+                if (spellTimers["ShockRoller"] <= 0)
+                {
+                    List<float> temp = Attack.Attack(PlayerPosition.position, "ShockRoller");
+                    freezeTime = temp[0];
+                    spellTimers["ShockRoller"] = temp[1];
+                    Debug.Log(spellTimers["ShockRoller"]);
+                }
+                else
+                {
+                    Debug.Log(spellTimers["ShockRoller"]);
+                }
+            }
+            else
+            {
+                List<float> temp = Attack.Attack(PlayerPosition.position, "ShockRoller");
+                freezeTime = temp[0];
+                spellTimers.Add("ShockRoller", temp[1]);
+
+                Debug.Log(spellTimers["ShockRoller"]);
+            }
+            
+            isFreeze = true;
+            rb2d.velocity = Vector2.zero;
+        }
+
+
 
         if (Input.GetKeyDown(KeyCode.Space) && dodgeTimer <= 0)
         {
@@ -123,6 +174,25 @@ public class PlayerController : MonoBehaviour
             else
             {
                 freezeTime -= Time.deltaTime;
+            }
+        }
+    }
+    private void updateCooldowns()
+    {
+        if(spellTimers.Count == 0)
+        {
+            return;
+        }
+        List<string> keys = new List<string>(spellTimers.Keys);
+        foreach (string key in keys)
+        {
+            if (spellTimers[key] <= 0)
+            {
+                spellTimers.Remove(key);
+            }
+            else
+            {
+                spellTimers[key] -= Time.deltaTime;
             }
         }
     }
