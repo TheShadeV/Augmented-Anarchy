@@ -50,10 +50,18 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+<<<<<<< Updated upstream
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
+=======
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
+>>>>>>> Stashed changes
         Console.WriteLine(isFreeze);
 
         if (!isFreeze)
@@ -102,6 +110,7 @@ public class Player : MonoBehaviour
                 freezeTime -= Time.deltaTime;
             }
         }
+
     }
 
 

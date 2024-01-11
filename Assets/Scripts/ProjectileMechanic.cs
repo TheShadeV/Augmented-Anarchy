@@ -8,7 +8,7 @@ public class ProjectileMechanic : MonoBehaviour
     private float range = 10f;
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("szar");
+        Debug.Log("Fly");
         if (other.name != "Player" && other.tag != "DeepMap")
         {
             if(other.GetComponent<EnemyReceiveDamage>() != null)
