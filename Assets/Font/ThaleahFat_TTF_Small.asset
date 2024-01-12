@@ -62,7 +62,11 @@ Material:
     - _FaceUVSpeedY: 0
     - _GlowInner: 0.543
     - _GlowOffset: -1
+<<<<<<< Updated upstream
     - _GlowOuter: 0.05
+=======
+    - _GlowOuter: 0
+>>>>>>> Stashed changes
     - _GlowPower: 1
     - _GradientScale: 6
     - _LightAngle: 3.1416

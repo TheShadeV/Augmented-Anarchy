@@ -74,7 +74,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: 7266554733783848530}
   m_StateMachineBehaviours:
-  - {fileID: -9017806596803478756}
+  - {fileID: 1189846835632849475}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -131,7 +131,7 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -155,6 +155,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da9eb469e4e5ad44d9c4b41c95b84414, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1189846835632849475
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 075ae99696fe61347b9f08cdc8ceee29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1101 &2398678711116814552

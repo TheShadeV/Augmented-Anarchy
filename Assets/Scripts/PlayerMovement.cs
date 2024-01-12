@@ -19,22 +19,22 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Walk(Vector2 movement)
     {
-        float moveSpeed = 3f;
+        float moveSpeed = 1.5f;
         rb.velocity = movement * moveSpeed;
     }
     public void Run(Vector2 movement)
     {
-        float moveSpeed = 6f;
+        float moveSpeed = 3f;
         rb.velocity = movement * moveSpeed;
     }
     public void Sprint(Vector2 movement)
     {
-        float moveSpeed = 10f;
+        float moveSpeed = 5f;
         rb.velocity = movement * moveSpeed;
     }
     public void Dash(Vector2 movement)
     {
-        float dashAmount = 7f;
+        float dashAmount = 3.5f;
         rb.MovePosition(rb.position + movement * dashAmount);
     }
 

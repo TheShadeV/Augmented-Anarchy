@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private Transform PlayerPosition;
     private PlayerMovement Movement;
     private SortedList<string, float> spellTimers = new SortedList<string, float>();
+    public int totalHealth;
+    public int maxHealth = 300;
 
     private void Start()
     {
@@ -27,17 +29,19 @@ public class PlayerController : MonoBehaviour
         Attack = GetComponent<PlayerAttack>();
         PlayerPosition = GetComponent<Transform>();
         Movement = GetComponent<PlayerMovement>();
+        totalHealth = maxHealth;
         isFreeze = false;
         freezeTime = 0.5f;
     }
 
     private void Update()
     {
-        updateCooldowns();
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if(totalHealth <= 0)
         {
-            SceneManager.LoadScene("Pause");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+        updateCooldowns();
+        
         Console.WriteLine(isFreeze);
 
         moveInput.x = Input.GetAxisRaw("Horizontal");
@@ -161,6 +165,8 @@ public class PlayerController : MonoBehaviour
             }
             if (isDashing)
             {
+
+                CreateDashEffect.CreateEffect(transform.position, moveInput, 7);
                 Movement.Dash(moveInput);
                 isDashing = false;
             }
@@ -195,5 +201,10 @@ public class PlayerController : MonoBehaviour
                 spellTimers[key] -= Time.deltaTime;
             }
         }
+    }
+    public void DealDamage(float damage)
+    {
+        totalHealth -= (int)damage;
+        Debug.Log("Player took " + damage + " damage");
     }
 }
