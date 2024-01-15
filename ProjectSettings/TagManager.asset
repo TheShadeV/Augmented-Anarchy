@@ -8,6 +8,12 @@ TagManager:
   - DeepMap
   - Terrain Objects
   - PauseMenuScreen
+<<<<<<< Updated upstream
+=======
+  - Enemy
+  - AcidVent
+  - Death
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX

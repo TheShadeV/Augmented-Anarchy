@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +18,15 @@ public class PlayerController : MonoBehaviour
     public float freezeTime;
     private PlayerAttack Attack;
     private Transform PlayerPosition;
+<<<<<<< Updated upstream
+=======
+    private PlayerMovement Movement;
+    private SortedList<string, float> spellTimers = new SortedList<string, float>();
+    public int totalHealth;
+    public int maxHealth = 300;
+    public GameObject DeathScreen;
+    
+>>>>>>> Stashed changes
 
     private void Start()
     {
@@ -30,6 +40,16 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+<<<<<<< Updated upstream
+=======
+        if(totalHealth <= 0)
+        {
+            DeathScreen.SetActive(true);
+
+        }
+        updateCooldowns();
+        
+>>>>>>> Stashed changes
         Console.WriteLine(isFreeze);
 
         moveInput.x = Input.GetAxisRaw("Horizontal");
@@ -115,4 +135,42 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+<<<<<<< Updated upstream
 }
+=======
+    private void updateCooldowns()
+    {
+        if(spellTimers.Count == 0)
+        {
+            return;
+        }
+        List<string> keys = new List<string>(spellTimers.Keys);
+        foreach (string key in keys)
+        {
+            if (spellTimers[key] <= 0)
+            {
+                spellTimers.Remove(key);
+            }
+            else
+            {
+                spellTimers[key] -= Time.deltaTime;
+            }
+        }
+    }
+    public void DealDamage(float damage)
+    {
+        totalHealth -= (int)damage;
+        Debug.Log("Player took " + damage + " damage");
+    }
+
+    public void Dying()
+    {
+        if (totalHealth <= 0)
+        {
+            DeathScreen.SetActive(true);
+            Debug.Log("Meghaltál");
+
+        }
+    }
+}
+>>>>>>> Stashed changes
