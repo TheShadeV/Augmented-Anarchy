@@ -7,6 +7,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D rb;
+    public bool isDashing;
+    public float dashTimer;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +17,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(dashTimer > 0)
+        {
+            dashTimer -= Time.deltaTime;
+        }
+        else
+        {
+            Physics2D.IgnoreLayerCollision(0, 4, false);
+        }
     }
     public void Walk(Vector2 movement)
     {
@@ -35,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
     public void Dash(Vector2 movement)
     {
         float dashAmount = 3.5f;
+        dashTimer = 0.1f;
+        Physics2D.IgnoreLayerCollision(0, 4, true);
         rb.MovePosition(rb.position + movement * dashAmount);
     }
 
