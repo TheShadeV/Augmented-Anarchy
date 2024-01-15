@@ -33,9 +33,10 @@ public class PlayerAttack : MonoBehaviour
         GameObject tempProjectile = projectileList[prefabName];
         ProjectileMechanic tempProjectileMechanic = tempProjectile.GetComponent<ProjectileMechanic>();
 
+        tempProjectileMechanic.type = "Player";
         menuPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         direction = (menuPos - (Vector2)playerPosition).normalized;
-        projPos = playerPosition + (Vector3)direction * 0.2f;
+        projPos = playerPosition + (Vector3)direction * 0.5f;
         proj = Instantiate(tempProjectile, projPos, Quaternion.identity);
         proj.GetComponent<Rigidbody2D>().velocity = direction * tempProjectileMechanic.speed;
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
