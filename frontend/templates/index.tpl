@@ -35,8 +35,7 @@
       <input type="hidden" name="mode" value="login">
       <button class="btn">Bejelentkezés</button>
       <p class="text">Nincs még fiókja? <a href="registration.php">Regisztráljon!</a></p>
-  </div>
-  </form>
+    </form>
   </div>
   <footer>
     <p>Készítette: Bráz Bálint, Trischler Gergő, Horváth Mátyás</p>
