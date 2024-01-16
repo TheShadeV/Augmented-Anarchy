@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5930882080821842593}
   m_Layer: 0
   m_Name: ShockArrow
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,11 +121,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 993aaed7935369a40b9a2554552afddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 
   damage: 20
   range: 2.5
-  cooldown: 0.5
+  cooldown: 1
   freezeTime: 0.2
   speed: 30
+  opponent: 
 --- !u!50 &7745223355871853817
 Rigidbody2D:
   serializedVersion: 4
