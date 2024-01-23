@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private PlayerAttack Attack;
     private Transform PlayerPosition;
     private PlayerMovement Movement;
-    private SortedList<string, float> spellTimers = new SortedList<string, float>();
+    public SortedList<string, float> spellTimers = new SortedList<string, float>();
     public int totalHealth;
     public int maxHealth = 300;
 
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
             isFreeze = true;
             rb2d.velocity = Vector2.zero;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        else if (Input.GetMouseButtonDown(1))
         {
             if(spellTimers.ContainsKey("ShockRoller"))
             {
@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
         {
             isDashing = true;
             dodgeTimer = 2f;
-            Debug.Log("Dodge");
+            Debug.Log("Dash");
         }
         if (dodgeTimer > 0)
         {
@@ -165,8 +165,8 @@ public class PlayerController : MonoBehaviour
             }
             if (isDashing)
             {
+                //CreateDashEffect.CreateEffect(transform.position, moveInput, 7);
 
-                CreateDashEffect.CreateEffect(transform.position, moveInput, 7);
                 Movement.Dash(moveInput);
                 isDashing = false;
             }
@@ -205,6 +205,8 @@ public class PlayerController : MonoBehaviour
     public void DealDamage(float damage)
     {
         totalHealth -= (int)damage;
+        anim.SetLayerWeight(2, 1);
+        anim.SetBool("isHurt", true);
         Debug.Log("Player took " + damage + " damage");
     }
 }
