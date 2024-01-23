@@ -23,23 +23,26 @@ public class ProjectileMechanic : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (type == "Player" && other.tag != "Player" && other.tag != "DeepMap")
+        if(other.tag != "Projectile")
         {
-            rb.velocity = Vector2.zero;
-            if(other.GetComponent<EnemyController>() != null)
+            if (type == "Player" && other.tag != "Player" && other.tag != "DeepMap")
             {
-                other.GetComponent<EnemyController>().DealDamage(damage);
+                rb.velocity = Vector2.zero;
+                if (other.GetComponent<EnemyController>() != null)
+                {
+                    other.GetComponent<EnemyController>().DealDamage(damage);
+                }
+                animator.SetBool("Explode", true);
             }
-            animator.SetBool("Explode", true);
-        }
-        else if(type == "Enemy" && other.tag != "Enemy" && other.tag != "DeepMap")
-        {
-            rb.velocity = Vector2.zero;
-            if (other.GetComponent<PlayerController>() != null)
+            else if (type == "Enemy" && other.tag != "Enemy" && other.tag != "DeepMap")
             {
-                other.GetComponent<PlayerController>().DealDamage(damage);
+                rb.velocity = Vector2.zero;
+                if (other.GetComponent<PlayerController>() != null)
+                {
+                    other.GetComponent<PlayerController>().DealDamage(damage);
+                }
+                animator.SetBool("Explode", true);
             }
-            animator.SetBool("Explode", true);
         }
     }
     private void FixedUpdate()

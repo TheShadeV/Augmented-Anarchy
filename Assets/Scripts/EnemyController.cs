@@ -6,12 +6,14 @@ public class EnemyController : MonoBehaviour
 {
     public float totalHealth;
     public float health;
-    public float detectDist = 9f, rangedAttackDistance = 8f;
+    private float detectDist = 7f, rangedAttackDistance = 4f;
     private Transform player;
     private Rigidbody2D rb2d;
+    private Animator anim;
     public float cd;
     void Start()
     {
+        anim = GetComponent<Animator>();
         totalHealth = 50;
         health = totalHealth;
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -21,7 +23,7 @@ public class EnemyController : MonoBehaviour
     {
         if (health <= 0)
         {
-            Destroy(gameObject);
+            anim.SetBool("Explode", true);
         }
         float Distance = Vector2.Distance(transform.position, player.position);
         
@@ -57,6 +59,7 @@ public class EnemyController : MonoBehaviour
     }
     public void DealDamage(float damage)
     {
+        anim.SetBool("isHurt", true);
         this.health -= damage;
     }
 }

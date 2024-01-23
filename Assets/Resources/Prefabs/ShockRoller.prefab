@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4915837637582039619}
   m_Layer: 0
   m_Name: ShockRoller
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.97, y: -0.52, z: 0.04172531}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -121,11 +121,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 993aaed7935369a40b9a2554552afddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 
   damage: 40
   range: 10
   cooldown: 2
   freezeTime: 0.3
   speed: 20
+  opponent: 
 --- !u!58 &7727651003579245128
 CircleCollider2D:
   m_ObjectHideFlags: 0
