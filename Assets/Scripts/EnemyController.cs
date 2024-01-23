@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        totalHealth = 50;
+        totalHealth = 45;
         health = totalHealth;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb2d = GetComponent<Rigidbody2D>();
