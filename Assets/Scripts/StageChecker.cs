@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class StageChecker : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class StageChecker : MonoBehaviour
     {
         isTimerRunning = true;
         enemiesLeft = GameObject.FindGameObjectsWithTag("Enemy");
+        stageTime = 0;
     }
 
     // Update is called once per frame
@@ -22,7 +24,7 @@ public class StageChecker : MonoBehaviour
     {
         if (isTimerRunning)
         {
-            stageTime = Time.time;
+            stageTime += Time.deltaTime;
         }
         if(enemiesLeft.Length > 0)
         {

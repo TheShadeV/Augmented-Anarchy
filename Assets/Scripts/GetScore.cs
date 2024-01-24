@@ -22,7 +22,7 @@ public class GetScore : MonoBehaviour
         hpText = HP.GetComponent<TextMeshProUGUI>();
         List<float> temp = checker.getScore();
         timeText.SetText("Stage Time: " + System.Math.Floor(temp[0] * 100) / 100 + " seconds");
-        hpText.SetText("Current HP: " + temp[1]);
+        hpText.SetText("Current HP: " + System.Math.Floor(temp[1] / 300 * 100) + "%");
     }
     void Awake()
     {
@@ -31,7 +31,7 @@ public class GetScore : MonoBehaviour
         hpText = HP.GetComponent<TextMeshProUGUI>();
         List<float> temp = checker.getScore();
         timeText.SetText("Stage Time: " + System.Math.Floor(temp[0]*100)/100 + " seconds");
-        hpText.SetText("Current HP: " + temp[1]);
+        hpText.SetText("Current HP: " + System.Math.Floor(temp[1] / 300 * 100) + "%");
 
     }
     public void setUp()
@@ -40,7 +40,7 @@ public class GetScore : MonoBehaviour
         hpText = HP.GetComponent<TextMeshProUGUI>();
         List<float> temp = checker.getScore();
         timeText.SetText("Stage Time: " + System.Math.Floor(temp[0] * 100) / 100 + " seconds");
-        hpText.SetText("Current HP: " + temp[1]);
+        hpText.SetText("Current HP: " + System.Math.Floor(temp[1] / 300 * 100) + "%");
     }
 
 }
