@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Jan 04. 01:00
--- Kiszolgáló verziója: 10.4.27-MariaDB
--- PHP verzió: 8.2.0
+-- Létrehozás ideje: 2024. Jan 29. 14:26
+-- Kiszolgáló verziója: 10.4.28-MariaDB
+-- PHP verzió: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,74 @@ SET time_zone = "+00:00";
 --
 -- Adatbázis: `augmentedanarchy`
 --
+
+DELIMITER $$
+--
+-- Eljárások
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `changeEmail` (IN `usernameIN` VARCHAR(100), IN `emailIN` VARCHAR(100), IN `pwIN` VARCHAR(100))   BEGIN
+    DECLARE temp INT;
+
+    SELECT COUNT(*) INTO temp FROM users WHERE nev = usernameIN and jelszo = SHA2(pwIN,512);
+
+	SELECT temp as 'darab';
+    IF temp = 1 THEN
+        UPDATE users SET email = emailIN WHERE nev = usernameIN;
+        SELECT 'Sikeres beszúrás' AS 'result';
+    ELSE
+        SELECT 'Nem található egyezés' AS 'result';
+    END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `changePassword` (IN `oldPW` VARCHAR(128), IN `newPW` VARCHAR(128), IN `usernameIN` VARCHAR(100))   BEGIN
+    DECLARE temp INT;
+
+    SELECT COUNT(*) INTO temp FROM users WHERE nev = usernameIN and jelszo = SHA2(oldPW,512);
+
+	SELECT temp as 'darab';
+    IF temp = 1 THEN
+        UPDATE users SET jelszo = SHA2(newPW,512) WHERE nev = usernameIN;
+        SELECT 'Sikeres beszúrás' AS 'result';
+    ELSE
+        SELECT 'Nem található egyezés' AS 'result';
+    END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `changeUsername` (IN `oldUsername` VARCHAR(100), IN `pwIN` VARCHAR(100), IN `newUsername` VARCHAR(100))   BEGIN
+    DECLARE temp INT;
+
+    SELECT COUNT(*) INTO temp FROM users WHERE nev = oldUsername and jelszo = SHA2(pwIN,512);
+
+	SELECT temp as 'darab';
+    IF temp = 1 THEN
+        UPDATE users SET nev = newUsername WHERE nev = oldUsername;
+        SELECT 'Sikeres beszúrás' AS 'result';
+    ELSE
+        SELECT 'Nem található egyezés' AS 'result';
+    END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `registrateUser` (IN `usernameIN` VARCHAR(100), IN `emailIN` VARCHAR(100), IN `passwordIN` CHAR(128))   BEGIN
+    DECLARE userCount INT;
+
+    SELECT COUNT(*) INTO userCount FROM users WHERE nev = usernameIN OR email = emailIN;
+
+    IF userCount = 0 THEN
+        INSERT INTO users (nev, jelszo, email) VALUES (usernameIN, SHA2(passwordIN,512), emailIN);
+        SELECT 'Sikeres beszúrás' AS isValid;
+    ELSE
+        SELECT 'Már létezik ilyen felhasználó' AS isValid;
+    END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `validateLogin` (IN `nevIN` VARCHAR(100), IN `jelszoIN` VARCHAR(100))   SELECT CASE WHEN EXISTS(
+        SELECT nev, jelszo FROM users WHERE nev = nevIN and jelszo = SHA2(jelszoIN,'256')
+    )
+    THEN 'TRUE'
+    ELSE 'FALSE'
+END AS 'isValid'$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -52,7 +120,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `nev` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `jelszo` varchar(100) NOT NULL,
+  `jelszo` char(128) NOT NULL,
   `regisztracioDatuma` timestamp NOT NULL DEFAULT current_timestamp(),
   `modositasDatuma` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -62,7 +130,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nev`, `email`, `jelszo`, `regisztracioDatuma`, `modositasDatuma`) VALUES
-(1, 'asd', 'asd@gmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', '2024-01-03 22:32:52', '2024-01-03 22:41:06');
+(1, 'asd', 'wasd@gmail.com', 'd404559f602eab6fd602ac7680dacbfaadd13630335e951f097af3900e9de176b6db28512f2e000b9d04fba5133e8b1c6e8df59db3a8ab9d60be4b97cc9e81db', '2024-01-03 22:32:52', '2024-01-29 13:17:45'),
+(2, 'TestUser', 'test@email.com', 'fe2592b42a727e977f055947385b709cc82b16b9a87f88c6abf3900d65d0cdc3', '2024-01-08 14:44:33', '2024-01-08 14:44:33'),
+(3, 'tanar', 'tanar@tanar.com', 'f98ceb6183689a37ac3b29acd239845008b5955417e68d17998a501f66943407', '2024-01-15 13:52:00', '2024-01-15 13:52:00'),
+(4, 'each', 'each@moon.com', '9e78b43ea00edcac8299e0cc8df7f6f913078171335f733a21d5d911b6999132', '2024-01-16 11:52:31', '2024-01-16 11:52:31'),
+(5, 'nonbinary', 'binary@non.com', '9a3a45d01531a20e89ac6ae10b0b0beb0492acd7216a368aa062d1a5fecaf9cd', '2024-01-18 11:31:04', '2024-01-18 11:31:04');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -95,7 +167,7 @@ ALTER TABLE `achievements`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Megkötések a kiírt táblákhoz
