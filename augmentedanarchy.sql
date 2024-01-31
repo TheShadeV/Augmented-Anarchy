@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Jan 29. 14:26
+-- Létrehozás ideje: 2024. Jan 31. 10:40
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -25,10 +25,10 @@ DELIMITER $$
 --
 -- Eljárások
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `changeEmail` (IN `usernameIN` VARCHAR(100), IN `emailIN` VARCHAR(100), IN `pwIN` VARCHAR(100))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `changeEmail` (IN `usernameIN` VARCHAR(100), IN `emailIN` VARCHAR(100), IN `pwIN` CHAR(128))   BEGIN
     DECLARE temp INT;
 
-    SELECT COUNT(*) INTO temp FROM users WHERE nev = usernameIN and jelszo = SHA2(pwIN,512);
+    SELECT COUNT(*) INTO temp FROM users WHERE nev = usernameIN and jelszo = pwIN;
 
 	SELECT temp as 'darab';
     IF temp = 1 THEN
@@ -39,24 +39,24 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `changeEmail` (IN `usernameIN` VARCH
     END IF;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `changePassword` (IN `oldPW` VARCHAR(128), IN `newPW` VARCHAR(128), IN `usernameIN` VARCHAR(100))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `changePassword` (IN `oldPW` CHAR(128), IN `newPW` CHAR(128), IN `usernameIN` VARCHAR(100))   BEGIN
     DECLARE temp INT;
 
-    SELECT COUNT(*) INTO temp FROM users WHERE nev = usernameIN and jelszo = SHA2(oldPW,512);
+    SELECT COUNT(*) INTO temp FROM users WHERE nev = usernameIN and jelszo = oldPW;
 
 	SELECT temp as 'darab';
     IF temp = 1 THEN
-        UPDATE users SET jelszo = SHA2(newPW,512) WHERE nev = usernameIN;
+        UPDATE users SET jelszo = newPW WHERE nev = usernameIN;
         SELECT 'Sikeres beszúrás' AS 'result';
     ELSE
         SELECT 'Nem található egyezés' AS 'result';
     END IF;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `changeUsername` (IN `oldUsername` VARCHAR(100), IN `pwIN` VARCHAR(100), IN `newUsername` VARCHAR(100))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `changeUsername` (IN `oldUsername` VARCHAR(100), IN `pwIN` CHAR(128), IN `newUsername` VARCHAR(100))   BEGIN
     DECLARE temp INT;
 
-    SELECT COUNT(*) INTO temp FROM users WHERE nev = oldUsername and jelszo = SHA2(pwIN,512);
+    SELECT COUNT(*) INTO temp FROM users WHERE nev = oldUsername and jelszo = pwIN;
 
 	SELECT temp as 'darab';
     IF temp = 1 THEN
@@ -73,15 +73,15 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `registrateUser` (IN `usernameIN` VA
     SELECT COUNT(*) INTO userCount FROM users WHERE nev = usernameIN OR email = emailIN;
 
     IF userCount = 0 THEN
-        INSERT INTO users (nev, jelszo, email) VALUES (usernameIN, SHA2(passwordIN,512), emailIN);
+        INSERT INTO users (nev, jelszo, email) VALUES (usernameIN, passwordIN, emailIN);
         SELECT 'Sikeres beszúrás' AS isValid;
     ELSE
         SELECT 'Már létezik ilyen felhasználó' AS isValid;
     END IF;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `validateLogin` (IN `nevIN` VARCHAR(100), IN `jelszoIN` VARCHAR(100))   SELECT CASE WHEN EXISTS(
-        SELECT nev, jelszo FROM users WHERE nev = nevIN and jelszo = SHA2(jelszoIN,'256')
+CREATE DEFINER=`root`@`localhost` PROCEDURE `validateLogin` (IN `nevIN` VARCHAR(100), IN `jelszoIN` CHAR(128))   SELECT CASE WHEN EXISTS(
+        SELECT nev, jelszo FROM users WHERE nev = nevIN and jelszo = jelszoIN
     )
     THEN 'TRUE'
     ELSE 'FALSE'
