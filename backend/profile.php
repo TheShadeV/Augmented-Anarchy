@@ -14,7 +14,7 @@ $user = egy_leker(
 );
 
 if ($user) {
-    $html = file_get_contents('templates/profile.tpl');
+    $html = file_get_contents('../frontend/templates/profile.tpl');
     $html = str_replace("##FNEV##", $_SESSION['nev'], $html);
     $user = user_leker($kapcsolat, $_SESSION['nev']);
     $sor = mysqli_fetch_array($user);

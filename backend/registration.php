@@ -1,5 +1,5 @@
 <?php
-$html = file_get_contents('templates/registration.tpl');
+$html = file_get_contents('../frontend/templates/registration.tpl');
 if (!isset($_POST['mode']) || $_POST['mode'] != 'reg') {
     $html = str_replace("##ERROR##", '', $html);
 } else {
@@ -24,7 +24,7 @@ if (!isset($_POST['mode']) || $_POST['mode'] != 'reg') {
     } else {
         $update = feltolt($kapcsolat, $_POST);
         if ($update) {
-            $html = file_get_contents("templates/index.tpl");
+            $html = file_get_contents("../frontend/templates/index.tpl");
             $html = str_replace("##SIKER##", "Sikeres regisztráció!", $html);
             $html = str_replace("##ERROR##", "", $html);
         }

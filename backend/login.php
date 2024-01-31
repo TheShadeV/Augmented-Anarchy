@@ -2,14 +2,14 @@
 session_start();
 if (isset($_POST["mode"]) && $_POST["mode"] == "login") {
     $usernev = trim(strip_tags($_POST['nev']));
-    $jelszo = hash('sha256', $_POST['jelszo']);
+    $jelszo = hash('sha512', $_POST['jelszo']);
 
     include("inc/db.inc");
     $kapcsolat = csatlakozas();
     $user = egy_leker($kapcsolat, $usernev, $jelszo);
 
     if ($user) {
-        $html = file_get_contents('templates/login.tpl');
+        $html = file_get_contents('../frontend/templates/login.tpl');
         $_SESSION['nev'] = $usernev;
         $_SESSION['jelszo'] = $jelszo;
 
@@ -36,7 +36,7 @@ if (isset($_POST["mode"]) && $_POST["mode"] == "login") {
             echo $html;
         }
     } else {
-        $html = file_get_contents('templates/index.tpl');
+        $html = file_get_contents('../frontend/templates/index.tpl');
         $html = str_replace("##SIKER##", '', $html);
         $html = str_replace("##ERROR##", 'Hibás felhasználónév vagy jelszó!', $html);
         echo $html;

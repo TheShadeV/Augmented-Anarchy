@@ -6,10 +6,10 @@ if (isset($_SESSION['nev']) && isset($_SESSION['jelszo'])) {
     unset($_SESSION['jelszo']);
     session_regenerate_id();
     session_destroy();
-    $html = file_get_contents('templates/logout.tpl');
+    $html = file_get_contents('../frontend/templates/logout.tpl');
     echo $html;
 } else {
-    $html = file_get_contents('templates/nologin.tpl');
+    $html = file_get_contents('../frontend/templates/nologin.tpl');
     echo $html;
 }
 ?>

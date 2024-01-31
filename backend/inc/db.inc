@@ -20,7 +20,7 @@ function csatlakozas()
  * Összes adat lekérdezése az adatbázisból
  * @param mysqli $kapcsolat         A MySQL-kapcsolat erőforrása
  * @param string $sql               A lekérdezés parancsa
- * @return Mysqli_result $query     A kérdések listája tömbként
+ * @return mysqli_result $query     A kérdések listája tömbként
  */
 function lekerdezes($kapcsolat)
 {
@@ -43,7 +43,7 @@ function feltolt($kapcsolat, $user)
     $sql = 'INSERT INTO users(nev, email, jelszo) VALUES (
             "' . $user["fnev"] .
         '", "' . $user["email"] .
-        '", "' . hash('sha256', $user["jelszo"]) . '")';
+        '", "' . hash('sha512', $user["jelszo"]) . '")';
     $query = mysqli_query($kapcsolat, $sql);
     if (!$query)
         die("Adatbázis-hiba: " . mysqli_error($kapcsolat));
@@ -116,12 +116,12 @@ function profil_leker($kapcsolat, $id)
  */
 function jelszo_modosit($kapcsolat, $usernev, $uj_jelszo, $regi_jelszo)
 {
-    $regi_jelszo_hash = hash('sha256', $regi_jelszo);
+    $regi_jelszo_hash = hash('sha512', $regi_jelszo);
     if (!jelszo_ellenorzes($kapcsolat, $usernev, $regi_jelszo_hash)) {
         return false;
     }
 
-    $uj_jelszo_hash = hash('sha256', $uj_jelszo);
+    $uj_jelszo_hash = hash('sha512', $uj_jelszo);
 
     $query = "UPDATE users SET jelszo = ? WHERE nev = ?";
     $stmt = mysqli_prepare($kapcsolat, $query);
@@ -175,4 +175,10 @@ function eredmenyek_lekerdezese($kapcsolat, $usernev)
     mysqli_stmt_close($stmt);
 
     return $eredmenyek;
+}
+
+function validateLogin($kapcsolat,$username,$password){
+    $sql = "CALL validateLogin('$username','$password')";
+    $query = mysqli_query($kapcsolat, $sql);
+    return mysqli_fetch_assoc($query);
 }
