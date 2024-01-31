@@ -11,14 +11,14 @@
     crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <link rel="stylesheet" type="text/css" href="../frontend/css/index.css">
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css">
   <title>Index</title>
 </head>
 
 <body>
-  <img src="img/Logo1.gif" alt="logo" class="logo">
+  <img src="../frontend/img/Logo1.gif" alt="logo" class="logo">
   <div class="container bejelentkezes">
     <h2 id="siker">##SIKER##</h2><br>
     <h4 id="warning">##ERROR##</h4><br>
@@ -40,7 +40,7 @@
   <footer>
     <p>Készítette: Bráz Bálint, Trischler Gergő, Horváth Mátyás</p>
   </footer>
-  <script src="js/index.js"></script>
+  <script src="../frontend/js/index.js"></script>
 </body>
 
 </html>

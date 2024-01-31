@@ -10,7 +10,7 @@
         crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="../frontend/css/index.css">
     <title>Regisztráció</title>
 </head>
 
@@ -36,12 +36,16 @@
                 <label>Jelszó újra</label><br>
                 <input type="hidden" name="mode" value="reg">
             </div>
+            <div class="checkbox">
+                <input type="checkbox" required>
+                <label>Elfogadom a <a href="acceptTerms.php" target="_blank">felhasználói feltételeket</a>!</label>
+            </div>
             <button class="btn">Regisztrálás</button>
             <br>
             <p class="text"><a href="index.php">Vissza a belépéshez</a></p>
         </form>
     </div>
-    <script src="js/registration.js"></script>
+    <script src="../frontend/js/registration.js"></script>
 </body>
 
 </html>

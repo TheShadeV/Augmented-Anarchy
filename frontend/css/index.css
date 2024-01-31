@@ -124,6 +124,11 @@ body {
   transform: translateY(-30px);
 }
 
+.checkbox {
+  margin-top: -15px;
+  margin-bottom: 25px;
+}
+
 footer {
   text-align: center;
   padding: 5px;

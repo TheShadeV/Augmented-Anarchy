@@ -16,12 +16,11 @@ body {
 
 .logo {
   top: 5%;
-  position: fixed;
-}
-
-.bejelentkezes {
-  top: 35%;
-  position: fixed;
+  position: relative;
+  height: 75px;
+  max-height: 75px;
+  margin-left: 5px;
+  margin-bottom: 5px;
 }
 
 .container {

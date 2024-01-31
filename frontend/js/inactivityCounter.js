@@ -1,5 +1,5 @@
 var remainingTimeElement = document.getElementById('remainingTime');
-var seconds = 300;
+var seconds = 900;
 var timer;
 
 function updateRemainingTime() {
@@ -21,7 +21,7 @@ function startTimer() {
   updateRemainingTime();
 
   document.addEventListener('click', function () {
-    seconds = 300;
+    seconds = 900;
     clearTimeout(timer);
     updateRemainingTime();
   });
