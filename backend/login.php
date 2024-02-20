@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_POST["mode"]) && $_POST["mode"] == "login") {
+if (isset($_POST["action"]) && $_POST["action"] == "login") {
     $usernev = trim(strip_tags($_POST['nev']));
     $jelszo = hash('sha512', $_POST['jelszo']);
 
@@ -41,7 +41,5 @@ if (isset($_POST["mode"]) && $_POST["mode"] == "login") {
         $html = str_replace("##ERROR##", 'Hibás felhasználónév vagy jelszó!', $html);
         echo $html;
     }
-} else {
-    header("location: index.php");
 }
 ?>
