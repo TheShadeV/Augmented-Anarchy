@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Jan 31. 10:40
+-- Létrehozás ideje: 2024. Feb 28. 12:29
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -67,18 +67,28 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `changeUsername` (IN `oldUsername` V
     END IF;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `registrateUser` (IN `usernameIN` VARCHAR(100), IN `emailIN` VARCHAR(100), IN `passwordIN` CHAR(128))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllMapScores` ()   SELECT map_id,user_id,map_time,health,score FROM mapscores$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getMapScores` (IN `mapID` INT)   SELECT user_id,map_time,health,score FROM mapscores WHERE map_id = mapID$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getPlayerAllMapScores` (IN `userID` INT)   SELECT map_id,map_time,health,score FROM mapscores WHERE user_id = userID$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getPlayerMapScores` (IN `mapID` INT, IN `userID` INT)   SELECT health,map_time,score FROM mapscores WHERE map_id = mapID AND user_id = userID$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `registrateUser` (IN `emailIN` VARCHAR(100), IN `usernameIN` VARCHAR(100), IN `passwordIN` CHAR(128))   BEGIN
     DECLARE userCount INT;
 
     SELECT COUNT(*) INTO userCount FROM users WHERE nev = usernameIN OR email = emailIN;
 
     IF userCount = 0 THEN
         INSERT INTO users (nev, jelszo, email) VALUES (usernameIN, passwordIN, emailIN);
-        SELECT 'Sikeres beszúrás' AS isValid;
+        SELECT 'True' AS isDone;
     ELSE
-        SELECT 'Már létezik ilyen felhasználó' AS isValid;
+        SELECT 'False' AS isDone;
     END IF;
 END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `uploadMapScore` (IN `userID` INT(11), IN `mapID` INT(100), IN `healthIN` INT, IN `maptimeIN` TIME, IN `scoresIN` INT)   INSERT INTO mapscores (map_id,user_id,map_time,health,score) VALUES (mapID,userID,maptimeIN,healthIN,scoresIN)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `validateLogin` (IN `nevIN` VARCHAR(100), IN `jelszoIN` CHAR(128))   SELECT CASE WHEN EXISTS(
         SELECT nev, jelszo FROM users WHERE nev = nevIN and jelszo = jelszoIN
@@ -92,23 +102,26 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `achievements`
+-- Tábla szerkezet ehhez a táblához `mapscores`
 --
 
-CREATE TABLE `achievements` (
-  `achievement_id` int(11) NOT NULL,
+CREATE TABLE `mapscores` (
+  `record_id` int(100) NOT NULL,
+  `map_id` int(100) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `kills` int(11) NOT NULL,
-  `elapsedTime` time NOT NULL,
-  `bestTime` time NOT NULL
+  `map_time` time NOT NULL,
+  `health` int(11) NOT NULL,
+  `score` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `achievements`
+-- A tábla adatainak kiíratása `mapscores`
 --
 
-INSERT INTO `achievements` (`achievement_id`, `user_id`, `kills`, `elapsedTime`, `bestTime`) VALUES
-(1, 1, 10, '00:15:01', '00:11:01');
+INSERT INTO `mapscores` (`record_id`, `map_id`, `user_id`, `map_time`, `health`, `score`) VALUES
+(1, 1, 2, '00:02:15', 200, 6500),
+(2, 2, 3, '00:03:12', 200, 4000),
+(3, 2, 1, '00:06:00', 145, 1450);
 
 -- --------------------------------------------------------
 
@@ -134,17 +147,19 @@ INSERT INTO `users` (`id`, `nev`, `email`, `jelszo`, `regisztracioDatuma`, `modo
 (2, 'TestUser', 'test@email.com', 'fe2592b42a727e977f055947385b709cc82b16b9a87f88c6abf3900d65d0cdc3', '2024-01-08 14:44:33', '2024-01-08 14:44:33'),
 (3, 'tanar', 'tanar@tanar.com', 'f98ceb6183689a37ac3b29acd239845008b5955417e68d17998a501f66943407', '2024-01-15 13:52:00', '2024-01-15 13:52:00'),
 (4, 'each', 'each@moon.com', '9e78b43ea00edcac8299e0cc8df7f6f913078171335f733a21d5d911b6999132', '2024-01-16 11:52:31', '2024-01-16 11:52:31'),
-(5, 'nonbinary', 'binary@non.com', '9a3a45d01531a20e89ac6ae10b0b0beb0492acd7216a368aa062d1a5fecaf9cd', '2024-01-18 11:31:04', '2024-01-18 11:31:04');
+(5, 'nonbinary', 'binary@non.com', '9a3a45d01531a20e89ac6ae10b0b0beb0492acd7216a368aa062d1a5fecaf9cd', '2024-01-18 11:31:04', '2024-01-18 11:31:04'),
+(10, 'vfx', 'vfx@gmai.com', 'b0f7b137049a80f705de46ab408ec7797a6e6b5e1682fdff1b222aef9b144a2a232d1900d0be4801f6896261b4f55fa3148806070a2449594afb83458c997e96', '2024-02-28 10:43:00', '2024-02-28 10:43:00'),
+(11, 'vf', 'vf', '95c914d92d2e70981be0f0acbf2a36670c8406a07ada88d0df71c0249c930368020594790435db2734aa7228833551a4d5d4d300e3d92ed23122e13071a183d8', '2024-02-28 10:43:56', '2024-02-28 10:43:56');
 
 --
 -- Indexek a kiírt táblákhoz
 --
 
 --
--- A tábla indexei `achievements`
+-- A tábla indexei `mapscores`
 --
-ALTER TABLE `achievements`
-  ADD PRIMARY KEY (`achievement_id`),
+ALTER TABLE `mapscores`
+  ADD PRIMARY KEY (`record_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -158,26 +173,26 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT a táblához `achievements`
+-- AUTO_INCREMENT a táblához `mapscores`
 --
-ALTER TABLE `achievements`
-  MODIFY `achievement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `mapscores`
+  MODIFY `record_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Megkötések a kiírt táblákhoz
 --
 
 --
--- Megkötések a táblához `achievements`
+-- Megkötések a táblához `mapscores`
 --
-ALTER TABLE `achievements`
-  ADD CONSTRAINT `achievements_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+ALTER TABLE `mapscores`
+  ADD CONSTRAINT `mapscores_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
