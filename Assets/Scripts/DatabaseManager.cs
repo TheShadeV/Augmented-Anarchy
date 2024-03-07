@@ -78,12 +78,11 @@ using System.Linq;
 
 public class ApiRequestExample : MonoBehaviour
 {
-    private const string apiUrl = "http://localhost/reg4/backend/ApiRequest.php"; // Cél API végpont URL-je
+    private const string apiUrl = "http://localhost/reg4/backend/ApiRequest.php";
 
     void Start()
     {
     }
-    
 
     IEnumerator SendPostRequest(string method)
     {
@@ -126,6 +125,10 @@ public class ApiRequestExample : MonoBehaviour
                         MainMenu.SetActive(true);
                         Login_Screen.SetActive(false);
                     }
+                    else
+                    {
+                        showError(www.downloadHandler.text.Trim());
+                    }
                 }
             }
         }
@@ -135,6 +138,7 @@ public class ApiRequestExample : MonoBehaviour
             if(true)
             {
                 Debug.Log("doing");
+                Debug.Log(Data[0]+"-"+Data[1]+"-"+Data[2]);
                 string email = Data[0];
                 string username = Data[1];
                 string password = Data[2];
@@ -169,6 +173,10 @@ public class ApiRequestExample : MonoBehaviour
                             MainMenu.SetActive(true);
                             Login_Screen.SetActive(false);
                         }
+                        else
+                        {
+                            showError(www.downloadHandler.text.Trim());
+                        }
                     }
                 }
             }
@@ -177,6 +185,7 @@ public class ApiRequestExample : MonoBehaviour
         }
 
     }
+
     static string ComputeSha512Hash(string input)
     {
         using (SHA512 sha512 = SHA512.Create())
@@ -198,7 +207,6 @@ public class ApiRequestExample : MonoBehaviour
     {
         StartCoroutine(SendPostRequest(method));
     }
-
 
     public string[] getLoginData()
     {
@@ -229,4 +237,15 @@ public class ApiRequestExample : MonoBehaviour
             return new[] {"Fos"}; 
         }
     }
+
+    public void showError(string error)
+    {
+        Transform StartMenu = GameObject.Find("Start-Menu").transform;
+        Transform ErrorWindow = StartMenu.Find("Pop-Up_Window");
+        ErrorWindow.gameObject.SetActive(true);
+        ErrorWindow.Find("Error_MSG").gameObject.GetComponent<TextMeshProUGUI>().text = error;
+
+    }
+
+
 }
