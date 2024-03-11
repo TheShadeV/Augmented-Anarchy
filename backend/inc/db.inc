@@ -182,9 +182,3 @@ function validateLogin($kapcsolat,$username,$password){
     $query = mysqli_query($kapcsolat, $sql);
     return mysqli_fetch_assoc($query);
 }
-
-function registerUser($kapcsolat,$email,$username,$password){
-    $sql = "CALL registrateUser('$email','$username','$password')";
-    $query = mysqli_query($kapcsolat,$sql);
-    return mysqli_fetch_assoc($query);
-}
