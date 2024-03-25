@@ -1,0 +1,33 @@
+<meta charset="utf-8">
+
+<body style="background-color: blueviolet;">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+
+
+    <!-- Main Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css" />
+
+
+
+    <div class="container" style="background-color: #501755;">
+        <form class="ml-5" id="questionForm">
+            <span class="text-white" id="questions"></span>
+        </form>
+        <p><b><span class="text-white mb-5" id="pontok"></span></b></p>
+        <p><b><span class="text-white mb-1" id="eredmeny"></span></b></p>
+        <span id="kep"></span>
+    </div>
+    <div id="content" class="mt-3"></div>
+
+
+
+    <script src="../js/quiz.js"></script>
+    <script>
+        window.onload = function () {
+            questionLoad();
+        };
+    </script>
+
+</body>
