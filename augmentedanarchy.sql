@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Feb 28. 12:29
+-- Létrehozás ideje: 2024. Már 25. 15:10
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -82,16 +82,16 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `registrateUser` (IN `emailIN` VARCH
 
     IF userCount = 0 THEN
         INSERT INTO users (nev, jelszo, email) VALUES (usernameIN, passwordIN, emailIN);
-        SELECT 'True' AS isDone;
+        SELECT 'TRUE' AS isDone;
     ELSE
-        SELECT 'False' AS isDone;
+        SELECT 'ERROR' AS isDone;
     END IF;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `uploadMapScore` (IN `userID` INT(11), IN `mapID` INT(100), IN `healthIN` INT, IN `maptimeIN` TIME, IN `scoresIN` INT)   INSERT INTO mapscores (map_id,user_id,map_time,health,score) VALUES (mapID,userID,maptimeIN,healthIN,scoresIN)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `validateLogin` (IN `nevIN` VARCHAR(100), IN `jelszoIN` CHAR(128))   SELECT CASE WHEN EXISTS(
-        SELECT nev, jelszo FROM users WHERE nev = nevIN and jelszo = jelszoIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `validateLogin` (IN `usernameIN` VARCHAR(100), IN `passwordIN` CHAR(128))   SELECT CASE WHEN EXISTS(
+        SELECT nev, jelszo FROM users WHERE nev = usernameIN and jelszo = passwordIN
     )
     THEN 'TRUE'
     ELSE 'FALSE'
@@ -126,6 +126,19 @@ INSERT INTO `mapscores` (`record_id`, `map_id`, `user_id`, `map_time`, `health`,
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `players`
+--
+
+CREATE TABLE `players` (
+  `user_id` int(11) NOT NULL,
+  `character_id` int(11) NOT NULL,
+  `skills` varchar(200) NOT NULL,
+  `inventory` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `users`
 --
 
@@ -149,7 +162,11 @@ INSERT INTO `users` (`id`, `nev`, `email`, `jelszo`, `regisztracioDatuma`, `modo
 (4, 'each', 'each@moon.com', '9e78b43ea00edcac8299e0cc8df7f6f913078171335f733a21d5d911b6999132', '2024-01-16 11:52:31', '2024-01-16 11:52:31'),
 (5, 'nonbinary', 'binary@non.com', '9a3a45d01531a20e89ac6ae10b0b0beb0492acd7216a368aa062d1a5fecaf9cd', '2024-01-18 11:31:04', '2024-01-18 11:31:04'),
 (10, 'vfx', 'vfx@gmai.com', 'b0f7b137049a80f705de46ab408ec7797a6e6b5e1682fdff1b222aef9b144a2a232d1900d0be4801f6896261b4f55fa3148806070a2449594afb83458c997e96', '2024-02-28 10:43:00', '2024-02-28 10:43:00'),
-(11, 'vf', 'vf', '95c914d92d2e70981be0f0acbf2a36670c8406a07ada88d0df71c0249c930368020594790435db2734aa7228833551a4d5d4d300e3d92ed23122e13071a183d8', '2024-02-28 10:43:56', '2024-02-28 10:43:56');
+(11, 'vf', 'vf', '95c914d92d2e70981be0f0acbf2a36670c8406a07ada88d0df71c0249c930368020594790435db2734aa7228833551a4d5d4d300e3d92ed23122e13071a183d8', '2024-02-28 10:43:56', '2024-02-28 10:43:56'),
+(12, 'PJani', 'probajanos@gmail.com', '23ea1396a56a5116bb86fabd22cf0e798b07a26fd57904777d23a644dd32d7430c9a7a56aec382cc2a92ca5ba23bb8e4cda817be9413c85ba4803aa8601071c3', '2024-02-29 08:32:27', '2024-02-29 08:32:27'),
+(13, 'thc', 'thc@gmail.com', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', '2024-02-29 09:43:10', '2024-02-29 09:43:10'),
+(14, 'jahhh', 'kakaka@gmail.com', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', '2024-03-06 12:54:38', '2024-03-06 12:54:38'),
+(19, 'kxv', 'kxv@gmail.com', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', '2024-03-25 14:03:55', '2024-03-25 14:03:55');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -160,6 +177,13 @@ INSERT INTO `users` (`id`, `nev`, `email`, `jelszo`, `regisztracioDatuma`, `modo
 --
 ALTER TABLE `mapscores`
   ADD PRIMARY KEY (`record_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- A tábla indexei `players`
+--
+ALTER TABLE `players`
+  ADD PRIMARY KEY (`character_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -179,10 +203,16 @@ ALTER TABLE `mapscores`
   MODIFY `record_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT a táblához `players`
+--
+ALTER TABLE `players`
+  MODIFY `character_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Megkötések a kiírt táblákhoz
@@ -193,6 +223,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `mapscores`
   ADD CONSTRAINT `mapscores_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Megkötések a táblához `players`
+--
+ALTER TABLE `players`
+  ADD CONSTRAINT `players_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

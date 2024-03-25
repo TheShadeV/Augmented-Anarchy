@@ -7,10 +7,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if(isset($_POST['username']) && isset($_POST['password'])) {
             $username = $_POST['username'];
             $password = $_POST['password'];
-            $response = array("success" => true, "message" => "Sikeres API kérés!", "data" => Login($username, $password));
 
+            $result = Login($username, $password);
+            if($result == "TRUE"){
+                $response = $result;
+            }
+            else{
+                $response = "Nem létezik ilyen felhasználónév és jelszó párosítás!";
+            }
         } else {
-            $response = array("success" => false, "message" => "Hiányzó paraméter!");
+            $response = "Hiányzó paraméter!";
         }
     } 
     
@@ -19,20 +25,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'];
             $username = $_POST['username'];
             $password = $_POST['password'];
-            $response = array("success" => true, "message" => "Sikeres API kérés!", "data" => Register($email, $username, $password));
+
+            $result = Register($email, $username, $password);
+            if($result == "TRUE"){
+                $response = $result;
+            }
+            else{
+                $response = "Már létezik ilyen felhasználó névvel vagy email címmel profil!";
+            }
         } else {
-            $response = array("success" => false, "message" => "Hiányzó paraméter!");
+            $response = "Hiányzó paraméter!";
         }
     } 
     
+
+
+
+    
     else {
-        $response = array("success" => false, "message" => "Nem létezik ilyen tipúsú kérés!");
+        $response = "Nem létezik ilyen tipúsú kérés!";
     }
 } else {
-    $response = array("success" => false, "message" => "Nem megfelelő kérési metódus!");
+    $response = "Nem megfelelő kérési metódus!";
 }
-    header('Content-Type: application/json');
-    echo json_encode($response);
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
 function Login($username, $jelszo) {
     include 'inc/db.inc';
