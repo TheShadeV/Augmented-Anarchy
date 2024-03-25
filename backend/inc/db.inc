@@ -1,4 +1,5 @@
 <?php
+// prettier-ignore
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_DBASE', 'augmentedanarchy');
@@ -51,28 +52,6 @@ function feltolt($kapcsolat, $user)
 }
 
 /**
- * A felhasználó nevének és jelszavának lekérése
- * @param mysqli $kapcsolat     A MySQL-kapcsolat erőforrása
- * @param string $usernev       A felhasználónév
- * @param string $jelszo        A SHA256-al kódolt jelszó
- * @param string $sql           A lekérdezés parancsa
- * @return boolean              Sikeres volt-e a lekérdezés
- */
-function egy_leker($kapcsolat, $usernev, $jelszo)
-{
-    $sql = "SELECT nev, jelszo FROM users WHERE nev = '{$usernev}' AND jelszo = '{$jelszo}'";
-    // "{$usernev}" === "'.$usernev.'"
-    $query = mysqli_query($kapcsolat, $sql);
-    if (!$query)
-        die("Adatbázis-hiba: " . mysqli_error($kapcsolat));
-    if (mysqli_num_rows($query) > 0) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-/**
  * A felhasználó adatait kéri le
  * @param mysqli $kapcsolat         A MySQL-kapcsolat erőforrása
  * @param string $usernev           A felhasználó felhasználóneve
@@ -80,7 +59,7 @@ function egy_leker($kapcsolat, $usernev, $jelszo)
  */
 function user_leker($kapcsolat, $usernev)
 {
-    $sql = 'SELECT * FROM users WHERE nev = "' . $usernev . '"';
+    $sql = 'SELECT * FROM users WHERE nev = '.$usernev.'';
     // "{$usernev}" === "'.$usernev.'"
     $query = mysqli_query($kapcsolat, $sql);
     if (!$query)
@@ -116,25 +95,9 @@ function profil_leker($kapcsolat, $id)
  */
 function jelszo_modosit($kapcsolat, $usernev, $uj_jelszo, $regi_jelszo)
 {
-    $regi_jelszo_hash = hash('sha512', $regi_jelszo);
-    if (!jelszo_ellenorzes($kapcsolat, $usernev, $regi_jelszo_hash)) {
-        return false;
-    }
-
-    $uj_jelszo_hash = hash('sha512', $uj_jelszo);
-
-    $query = "UPDATE users SET jelszo = ? WHERE nev = ?";
-    $stmt = mysqli_prepare($kapcsolat, $query);
-    mysqli_stmt_bind_param($stmt, "ss", $uj_jelszo_hash, $usernev);
-    $success = mysqli_stmt_execute($stmt);
-
-    if ($success) {
-        mysqli_stmt_close($stmt);
-        return true;
-    } else {
-        mysqli_stmt_close($stmt);
-        return false;
-    }
+    $sql = "CALL changePassword('$regi_jelszo','$uj_jelszo','$usernev')";
+    $query = mysqli_query($kapcsolat, $sql);
+    return mysqli_fetch_assoc($query);
 }
 
 /**
@@ -177,8 +140,34 @@ function eredmenyek_lekerdezese($kapcsolat, $usernev)
     return $eredmenyek;
 }
 
-function validateLogin($kapcsolat,$username,$password){
+/**
+ * 
+ */
+function validateLogin($kapcsolat,$username,$password)
+{
     $sql = "CALL validateLogin('$username','$password')";
     $query = mysqli_query($kapcsolat, $sql);
-    return mysqli_fetch_assoc($query);
+
+    foreach ($query as $row) {
+        foreach($row as $key => $value){
+            if($value){
+                return($value);
+            }
+        }
+    }
+
+} 
+/** * */ 
+function registerUser($kapcsolat,$email,$username,$password) 
+{
+    $sql = "CALL registrateUser('$email','$username','$password')"; $query =
+    $query = mysqli_query($kapcsolat, $sql);
+    
+    foreach ($query as $row) {
+        foreach($row as $key => $value){
+            if($value){
+                return($value);
+            }
+        }
+    }
 }
