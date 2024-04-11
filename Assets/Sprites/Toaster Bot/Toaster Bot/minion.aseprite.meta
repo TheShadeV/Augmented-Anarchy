@@ -1,0 +1,1007 @@
+fileFormatVersion: 2
+guid: 6639d8a617d7c6147a53328d0ae76f59
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: minion_Frame_0
+    originalName: 
+    pivot: {x: 2.75, y: -0.2}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 100
+      y: 139
+      width: 16
+      height: 15
+    spriteID: 4f38dbc0f428d814ca257b1cd132c4d2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 100, y: 139}
+  - name: minion_Frame_1
+    originalName: 
+    pivot: {x: 2.75, y: -0.1875}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 28
+      y: 139
+      width: 16
+      height: 16
+    spriteID: 19b0ed2c55156ae4284bb82785a91c85
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 28, y: 139}
+  - name: minion_Frame_2
+    originalName: 
+    pivot: {x: 2.75, y: -0.1764706}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 139
+      width: 16
+      height: 17
+    spriteID: e6c351a0cddfdf24ca200e074dffcdb9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 139}
+  - name: minion_Frame_3
+    originalName: 
+    pivot: {x: 2.75, y: -0.1875}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 52
+      y: 139
+      width: 16
+      height: 16
+    spriteID: 4c8be9c88d0754a429b5435b6cc4ce14
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 52, y: 139}
+  - name: minion_Frame_4
+    originalName: 
+    pivot: {x: 2.75, y: -0.2}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 124
+      y: 139
+      width: 16
+      height: 15
+    spriteID: 7b51733db41d3c749b1f712cf8869cda
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 124, y: 139}
+  - name: minion_Frame_5
+    originalName: 
+    pivot: {x: 2.75, y: -0.2}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 148
+      y: 139
+      width: 16
+      height: 15
+    spriteID: 82f57b75cc6404b49a1de798f4a10bc4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 148, y: 139}
+  - name: minion_Frame_6
+    originalName: 
+    pivot: {x: 2.5882354, y: -0.42857143}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 172
+      y: 139
+      width: 17
+      height: 14
+    spriteID: eb435ea5a843b9445854b924c7f1d294
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 172, y: 139}
+  - name: minion_Frame_7
+    originalName: 
+    pivot: {x: 2.4444444, y: -0.375}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 152
+      y: 115
+      width: 18
+      height: 16
+    spriteID: 3641f5fd37b53434aaab3670e6fd9471
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 152, y: 115}
+  - name: minion_Frame_8
+    originalName: 
+    pivot: {x: 2.4444444, y: -0.3125}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 178
+      y: 115
+      width: 18
+      height: 16
+    spriteID: bea0b719aefbde549861ee6c62cc3403
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 178, y: 115}
+  - name: minion_Frame_9
+    originalName: 
+    pivot: {x: 3.5833333, y: -0.2}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 220
+      y: 139
+      width: 12
+      height: 15
+    spriteID: 215774c69e075d448b03ff3e781c7b07
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 220, y: 139}
+  - name: minion_Frame_10
+    originalName: 
+    pivot: {x: 2.15, y: -0.33333334}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 124
+      y: 115
+      width: 20
+      height: 15
+    spriteID: 3a4d993af8c926142bc71695e6c0316c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 124, y: 115}
+  - name: minion_Frame_11
+    originalName: 
+    pivot: {x: 2.047619, y: -0.375}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 115
+      width: 21
+      height: 16
+    spriteID: 491d2de603b0dfa42a33e927d2049742
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 115}
+  - name: minion_Frame_12
+    originalName: 
+    pivot: {x: 2.047619, y: -0.3125}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 33
+      y: 115
+      width: 21
+      height: 16
+    spriteID: de65fdceec1d4d64d86c76ce6216a017
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 33, y: 115}
+  - name: minion_Frame_13
+    originalName: 
+    pivot: {x: 2, y: -0.2}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 94
+      y: 115
+      width: 22
+      height: 15
+    spriteID: beb3d689b24501f4cbcef327480a9a8f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 94, y: 115}
+  - name: minion_Frame_14
+    originalName: 
+    pivot: {x: 1.4666667, y: -0.1875}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 133
+      y: 63
+      width: 30
+      height: 16
+    spriteID: 93b72c0c3729100428a5d0616638de71
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 133, y: 63}
+  - name: minion_Frame_15
+    originalName: 
+    pivot: {x: 1.5172414, y: -0.1764706}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 96
+      y: 63
+      width: 29
+      height: 17
+    spriteID: c5a301e5f9c29b644919512a2678f2c8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 96, y: 63}
+  - name: minion_Frame_16
+    originalName: 
+    pivot: {x: 1.4193549, y: -0.2}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 171
+      y: 63
+      width: 31
+      height: 15
+    spriteID: 33d44b67224f8c64e9a6f87e1f8ff4ff
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 171, y: 63}
+  - name: minion_Frame_17
+    originalName: 
+    pivot: {x: 1.5172414, y: -0.2}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 210
+      y: 63
+      width: 29
+      height: 15
+    spriteID: ccd9b2ae268263c459d4782c1f44af13
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 210, y: 63}
+  - name: minion_Frame_18
+    originalName: 
+    pivot: {x: 1.8333333, y: -0.21428572}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 62
+      y: 115
+      width: 24
+      height: 14
+    spriteID: b3a3e489aa7b5604db0e80e6c8b2351a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 62, y: 115}
+  - name: minion_Frame_19
+    originalName: 
+    pivot: {x: 0.45360824, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 105
+      y: 34
+      width: 97
+      height: 20
+    spriteID: 52b5c8e6e6981884e838afca2775a77a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 105, y: 34}
+  - name: minion_Frame_20
+    originalName: 
+    pivot: {x: 0.47311828, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 93
+      height: 22
+    spriteID: 8145afd64b25ad24dbad80d060b43814
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: minion_Frame_21
+    originalName: 
+    pivot: {x: 0.47311828, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 34
+      width: 93
+      height: 21
+    spriteID: 8c1f172f225d8b74dba56f879bfdb507
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 34}
+  - name: minion_Frame_22
+    originalName: 
+    pivot: {x: 0.4888889, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 105
+      y: 4
+      width: 90
+      height: 22
+    spriteID: 78c34c7c3cac0c443ae13c2a1d75a4af
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 105, y: 4}
+  - name: minion_Frame_23
+    originalName: 
+    pivot: {x: 0.5238095, y: -0.047619052}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 63
+      width: 84
+      height: 21
+    spriteID: 77775d297d5783e4ca68bbfd76d70183
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 63}
+  - name: minion_Frame_24
+    originalName: 
+    pivot: {x: 2.5882354, y: -0.375}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 231
+      y: 115
+      width: 17
+      height: 16
+    spriteID: fa0745d38a58be74fa252c6aaffa1778
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 231, y: 115}
+  - name: minion_Frame_25
+    originalName: 
+    pivot: {x: 2.75, y: -0.3125}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 76
+      y: 139
+      width: 16
+      height: 16
+    spriteID: dfc70308032c6564bba816bcf5f97fe8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 76, y: 139}
+  - name: minion_Frame_26
+    originalName: 
+    pivot: {x: 2.368421, y: -0.2}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 204
+      y: 115
+      width: 19
+      height: 15
+    spriteID: 4de80f84cf9c4df4ea4e6df8577133ed
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 204, y: 115}
+  - name: minion_Frame_27
+    originalName: 
+    pivot: {x: 1.6071429, y: -0.2}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 92
+      width: 28
+      height: 15
+    spriteID: 6324b33466deb4f438a39584f0b20046
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 92}
+  - name: minion_Frame_28
+    originalName: 
+    pivot: {x: 1.3589743, y: -0.2}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 203
+      y: 4
+      width: 39
+      height: 15
+    spriteID: e003549a8c2cfc84dbdc43931a8f152c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 203, y: 4}
+  - name: minion_Frame_29
+    originalName: 
+    pivot: {x: 1.325, y: -0.2}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 210
+      y: 34
+      width: 40
+      height: 15
+    spriteID: 181eace9c99e9e14d8385c1298bc51dd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 210, y: 34}
+  - name: minion_Frame_30
+    originalName: 
+    pivot: {x: 2.9333334, y: -0.2}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 197
+      y: 139
+      width: 15
+      height: 15
+    spriteID: 47187021ef8bbab47ad36dd0553a240c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 197, y: 139}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: -1755558784
+    name: minion
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: minion_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 9
+        y: 3
+        width: 16
+        height: 15
+      spriteId: 4f38dbc0f428d814ca257b1cd132c4d2
+    - name: minion_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 9
+        y: 3
+        width: 16
+        height: 16
+      spriteId: 19b0ed2c55156ae4284bb82785a91c85
+    - name: minion_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 9
+        y: 3
+        width: 16
+        height: 17
+      spriteId: e6c351a0cddfdf24ca200e074dffcdb9
+    - name: minion_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 9
+        y: 3
+        width: 16
+        height: 16
+      spriteId: 4c8be9c88d0754a429b5435b6cc4ce14
+    - name: minion_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 9
+        y: 3
+        width: 16
+        height: 15
+      spriteId: 7b51733db41d3c749b1f712cf8869cda
+    - name: minion_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 9
+        y: 3
+        width: 16
+        height: 15
+      spriteId: 82f57b75cc6404b49a1de798f4a10bc4
+    - name: minion_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 9
+        y: 6
+        width: 17
+        height: 14
+      spriteId: eb435ea5a843b9445854b924c7f1d294
+    - name: minion_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 9
+        y: 6
+        width: 18
+        height: 16
+      spriteId: 3641f5fd37b53434aaab3670e6fd9471
+    - name: minion_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 9
+        y: 5
+        width: 18
+        height: 16
+      spriteId: bea0b719aefbde549861ee6c62cc3403
+    - name: minion_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 10
+        y: 3
+        width: 12
+        height: 15
+      spriteId: 215774c69e075d448b03ff3e781c7b07
+    - name: minion_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 10
+        y: 5
+        width: 20
+        height: 15
+      spriteId: 3a4d993af8c926142bc71695e6c0316c
+    - name: minion_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 10
+        y: 6
+        width: 21
+        height: 16
+      spriteId: 491d2de603b0dfa42a33e927d2049742
+    - name: minion_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 10
+        y: 5
+        width: 21
+        height: 16
+      spriteId: de65fdceec1d4d64d86c76ce6216a017
+    - name: minion_Frame_13
+      frameIndex: 13
+      cellRect:
+        x: 9
+        y: 3
+        width: 22
+        height: 15
+      spriteId: beb3d689b24501f4cbcef327480a9a8f
+    - name: minion_Frame_14
+      frameIndex: 14
+      cellRect:
+        x: 9
+        y: 3
+        width: 30
+        height: 16
+      spriteId: 93b72c0c3729100428a5d0616638de71
+    - name: minion_Frame_15
+      frameIndex: 15
+      cellRect:
+        x: 9
+        y: 3
+        width: 29
+        height: 17
+      spriteId: c5a301e5f9c29b644919512a2678f2c8
+    - name: minion_Frame_16
+      frameIndex: 16
+      cellRect:
+        x: 9
+        y: 3
+        width: 31
+        height: 15
+      spriteId: 33d44b67224f8c64e9a6f87e1f8ff4ff
+    - name: minion_Frame_17
+      frameIndex: 17
+      cellRect:
+        x: 9
+        y: 3
+        width: 29
+        height: 15
+      spriteId: ccd9b2ae268263c459d4782c1f44af13
+    - name: minion_Frame_18
+      frameIndex: 18
+      cellRect:
+        x: 9
+        y: 3
+        width: 24
+        height: 14
+      spriteId: b3a3e489aa7b5604db0e80e6c8b2351a
+    - name: minion_Frame_19
+      frameIndex: 19
+      cellRect:
+        x: 9
+        y: 0
+        width: 97
+        height: 20
+      spriteId: 52b5c8e6e6981884e838afca2775a77a
+    - name: minion_Frame_20
+      frameIndex: 20
+      cellRect:
+        x: 9
+        y: 0
+        width: 93
+        height: 22
+      spriteId: 8145afd64b25ad24dbad80d060b43814
+    - name: minion_Frame_21
+      frameIndex: 21
+      cellRect:
+        x: 9
+        y: 0
+        width: 93
+        height: 21
+      spriteId: 8c1f172f225d8b74dba56f879bfdb507
+    - name: minion_Frame_22
+      frameIndex: 22
+      cellRect:
+        x: 9
+        y: 0
+        width: 90
+        height: 22
+      spriteId: 78c34c7c3cac0c443ae13c2a1d75a4af
+    - name: minion_Frame_23
+      frameIndex: 23
+      cellRect:
+        x: 9
+        y: 1
+        width: 84
+        height: 21
+      spriteId: 77775d297d5783e4ca68bbfd76d70183
+    - name: minion_Frame_24
+      frameIndex: 24
+      cellRect:
+        x: 9
+        y: 6
+        width: 17
+        height: 16
+      spriteId: fa0745d38a58be74fa252c6aaffa1778
+    - name: minion_Frame_25
+      frameIndex: 25
+      cellRect:
+        x: 9
+        y: 5
+        width: 16
+        height: 16
+      spriteId: dfc70308032c6564bba816bcf5f97fe8
+    - name: minion_Frame_26
+      frameIndex: 26
+      cellRect:
+        x: 8
+        y: 3
+        width: 19
+        height: 15
+      spriteId: 4de80f84cf9c4df4ea4e6df8577133ed
+    - name: minion_Frame_27
+      frameIndex: 27
+      cellRect:
+        x: 8
+        y: 3
+        width: 28
+        height: 15
+      spriteId: 6324b33466deb4f438a39584f0b20046
+    - name: minion_Frame_28
+      frameIndex: 28
+      cellRect:
+        x: 0
+        y: 3
+        width: 39
+        height: 15
+      spriteId: e003549a8c2cfc84dbdc43931a8f152c
+    - name: minion_Frame_29
+      frameIndex: 29
+      cellRect:
+        x: 0
+        y: 3
+        width: 40
+        height: 15
+      spriteId: 181eace9c99e9e14d8385c1298bc51dd
+    - name: minion_Frame_30
+      frameIndex: 30
+      cellRect:
+        x: 9
+        y: 3
+        width: 15
+        height: 15
+      spriteId: 47187021ef8bbab47ad36dd0553a240c
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  generatePhysicsShape: 0
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 106, y: 22}
