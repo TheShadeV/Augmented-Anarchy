@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Street_02.unity
     guid: af8dc99a5dd1b37409fc6e6de5f5fe2a
+  - enabled: 1
+    path: Assets/Scenes/City_01.unity
+    guid: 27ce9c4b05c7a1944a3183e6ac7ce693
+  - enabled: 1
+    path: Assets/Scenes/CyberVoid.unity
+    guid: 5ecfa6458383ea54cb25879c6cf1c3c6
   m_configObjects: {}
