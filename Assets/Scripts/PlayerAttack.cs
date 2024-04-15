@@ -23,8 +23,8 @@ public class PlayerAttack : MonoBehaviour
 
     private void Start()
     {
-        projectileList.Add("ShockArrow", Resources.Load<GameObject>("Prefabs/ShockArrow"));
-        projectileList.Add("ShockRoller", Resources.Load<GameObject>("Prefabs/ShockRoller"));
+        projectileList.Add("ShockArrow", Resources.Load<GameObject>("Prefabs/Projectiles/ShockArrow"));
+        projectileList.Add("ShockRoller", Resources.Load<GameObject>("Prefabs/Projectiles/ShockRoller"));
     }
 
     public List<float> Attack(Vector3 playerPosition, string prefabName)
