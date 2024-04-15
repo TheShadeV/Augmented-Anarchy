@@ -1,12 +1,15 @@
 <?php
-$apiUrl = 'http://localhost/reg4/backend/ApiRequest.php';
+$apiUrl = 'http://localhost/Augmented-Anarchy/backend/ApiRequest.php';
 
 // Bemeneti adatok
-$username = 'asd';
-$password = '12345';
+$user_id = 1;
+$map_id = 1;
+$health = 100;
+$maptime = 100;
+$score = 100;
 
 // Bemeneti adatok összeállítása
-$data = array('mode' => 'login', 'username' => $username, 'password' => hash('sha512',$password));
+$data = array('mode' => 'uploadMapScore', 'user_id' => $user_id, 'map_id' => $map_id, 'health' => $health, 'maptime' => $maptime, 'score' => $score);
 
 // HTTP kérés összeállítása
 $options = array(
@@ -24,8 +27,12 @@ $response = file_get_contents($apiUrl, false, stream_context_create($options));
 if ($response === false) {
     echo 'Hiba az API kérés során.';
 } else {
-    // Sikeres válasz esetén dolgozd fel
+    // Sikeres válasz esetén dolgozd fel 'password' => hash('sha512',$password), 'newusername' => $email
     $response = mb_convert_encoding($response, 'UTF-8', 'auto');
     echo 'API válasz: ' . $response;
 }
+
 ?>
+
+
+ 

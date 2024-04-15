@@ -1,108 +1,31 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
 --
--- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Már 25. 15:10
--- Kiszolgáló verziója: 10.4.28-MariaDB
--- PHP verzió: 8.2.4
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Adatbázis: `augmentedanarchy`
+-- Table structure for `characters` (A tábla szerkezete a `characters` táblához)
 --
 
-DELIMITER $$
+CREATE TABLE `characters` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `class` varchar(6) NOT NULL,
+  `health` int(5) NOT NULL,
+  `equipped` varchar(128) NOT NULL,
+  `acquired` varchar(128) NOT NULL,
+  `currency` int(11) NOT NULL,
+  `exp` int(11) NOT NULL,
+  `stage` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
--- Eljárások
+-- Data for table `characters` (A tábla adatainak kiíratása `characters` tábla)
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `changeEmail` (IN `usernameIN` VARCHAR(100), IN `emailIN` VARCHAR(100), IN `pwIN` CHAR(128))   BEGIN
-    DECLARE temp INT;
 
-    SELECT COUNT(*) INTO temp FROM users WHERE nev = usernameIN and jelszo = pwIN;
-
-	SELECT temp as 'darab';
-    IF temp = 1 THEN
-        UPDATE users SET email = emailIN WHERE nev = usernameIN;
-        SELECT 'Sikeres beszúrás' AS 'result';
-    ELSE
-        SELECT 'Nem található egyezés' AS 'result';
-    END IF;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `changePassword` (IN `oldPW` CHAR(128), IN `newPW` CHAR(128), IN `usernameIN` VARCHAR(100))   BEGIN
-    DECLARE temp INT;
-
-    SELECT COUNT(*) INTO temp FROM users WHERE nev = usernameIN and jelszo = oldPW;
-
-	SELECT temp as 'darab';
-    IF temp = 1 THEN
-        UPDATE users SET jelszo = newPW WHERE nev = usernameIN;
-        SELECT 'Sikeres beszúrás' AS 'result';
-    ELSE
-        SELECT 'Nem található egyezés' AS 'result';
-    END IF;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `changeUsername` (IN `oldUsername` VARCHAR(100), IN `pwIN` CHAR(128), IN `newUsername` VARCHAR(100))   BEGIN
-    DECLARE temp INT;
-
-    SELECT COUNT(*) INTO temp FROM users WHERE nev = oldUsername and jelszo = pwIN;
-
-	SELECT temp as 'darab';
-    IF temp = 1 THEN
-        UPDATE users SET nev = newUsername WHERE nev = oldUsername;
-        SELECT 'Sikeres beszúrás' AS 'result';
-    ELSE
-        SELECT 'Nem található egyezés' AS 'result';
-    END IF;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllMapScores` ()   SELECT map_id,user_id,map_time,health,score FROM mapscores$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getMapScores` (IN `mapID` INT)   SELECT user_id,map_time,health,score FROM mapscores WHERE map_id = mapID$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getPlayerAllMapScores` (IN `userID` INT)   SELECT map_id,map_time,health,score FROM mapscores WHERE user_id = userID$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getPlayerMapScores` (IN `mapID` INT, IN `userID` INT)   SELECT health,map_time,score FROM mapscores WHERE map_id = mapID AND user_id = userID$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `registrateUser` (IN `emailIN` VARCHAR(100), IN `usernameIN` VARCHAR(100), IN `passwordIN` CHAR(128))   BEGIN
-    DECLARE userCount INT;
-
-    SELECT COUNT(*) INTO userCount FROM users WHERE nev = usernameIN OR email = emailIN;
-
-    IF userCount = 0 THEN
-        INSERT INTO users (nev, jelszo, email) VALUES (usernameIN, passwordIN, emailIN);
-        SELECT 'TRUE' AS isDone;
-    ELSE
-        SELECT 'ERROR' AS isDone;
-    END IF;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `uploadMapScore` (IN `userID` INT(11), IN `mapID` INT(100), IN `healthIN` INT, IN `maptimeIN` TIME, IN `scoresIN` INT)   INSERT INTO mapscores (map_id,user_id,map_time,health,score) VALUES (mapID,userID,maptimeIN,healthIN,scoresIN)$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `validateLogin` (IN `usernameIN` VARCHAR(100), IN `passwordIN` CHAR(128))   SELECT CASE WHEN EXISTS(
-        SELECT nev, jelszo FROM users WHERE nev = usernameIN and jelszo = passwordIN
-    )
-    THEN 'TRUE'
-    ELSE 'FALSE'
-END AS 'isValid'$$
-
-DELIMITER ;
+INSERT INTO `characters` (`id`, `user_id`, `class`, `health`, `equipped`, `acquired`, `currency`, `exp`, `stage`) VALUES
+(1, 1, 'ranger', 100, '{MB1 : \"Shock Arrow\", MB2 : \"Shock Roller\"}', '{\"Shock Arrow\", \"Shock Roller\"}', 0, 0, 0),
+(2, 2, 'ranger', 55, '{MB1 : \"Shock Arrow\", MB2 : \"Shock Roller\"}', '{\"Shock Arrow\", \"Shock Roller\"}', 0, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `mapscores`
+-- Table structure for `mapscores` (A tábla szerkezete a `mapscores` táblához)
 --
 
 CREATE TABLE `mapscores` (
@@ -115,7 +38,7 @@ CREATE TABLE `mapscores` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `mapscores`
+-- Data for table `mapscores` (A tábla adatainak kiíratása `mapscores` tábla)
 --
 
 INSERT INTO `mapscores` (`record_id`, `map_id`, `user_id`, `map_time`, `health`, `score`) VALUES
@@ -126,20 +49,27 @@ INSERT INTO `mapscores` (`record_id`, `map_id`, `user_id`, `map_time`, `health`,
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `players`
+-- Table structure for `sessions` (A tábla szerkezete a `sessions` táblához)
 --
 
-CREATE TABLE `players` (
-  `user_id` int(11) NOT NULL,
-  `character_id` int(11) NOT NULL,
-  `skills` varchar(200) NOT NULL,
-  `inventory` varchar(200) NOT NULL
+CREATE TABLE `sessions` (
+  `id` int(11) NOT NULL,
+  `token` int(11) NOT NULL,
+  `character_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Data for table `sessions` (A tábla adatainak kiíratása `sessions` tábla)
+--
+
+INSERT INTO `sessions` (`id`, `token`, `character_id`) VALUES
+(1, 1234, 2),
+(2, 5678, 1);
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `users`
+-- Table structure for `users` (A tábla szerkezete a `users` táblához)
 --
 
 CREATE TABLE `users` (
@@ -152,7 +82,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `users`
+-- Data for table `users` (A tábla adatainak kiíratása `users` tábla)
 --
 
 INSERT INTO `users` (`id`, `nev`, `email`, `jelszo`, `regisztracioDatuma`, `modositasDatuma`) VALUES
@@ -169,68 +99,325 @@ INSERT INTO `users` (`id`, `nev`, `email`, `jelszo`, `regisztracioDatuma`, `modo
 (19, 'kxv', 'kxv@gmail.com', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', '2024-03-25 14:03:55', '2024-03-25 14:03:55');
 
 --
--- Indexek a kiírt táblákhoz
+-- Indexes for the displayed tables
 --
 
 --
--- A tábla indexei `mapscores`
+-- Indexes for table `characters` (A tábla indexei `characters` táblához)
+--
+ALTER TABLE `characters`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `mapscores` (A tábla indexei `mapscores` táblához)
 --
 ALTER TABLE `mapscores`
   ADD PRIMARY KEY (`record_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- A tábla indexei `players`
+-- Indexes for table `sessions` (A tábla indexei `sessions` táblához)
 --
-ALTER TABLE `players`
-  ADD PRIMARY KEY (`character_id`),
-  ADD KEY `user_id` (`user_id`);
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `character_id` (`character_id`);
 
 --
--- A tábla indexei `users`
+-- Indexes for table `users` (A tábla indexei `users` táblához)
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- A kiírt táblák AUTO_INCREMENT értéke
+-- AUTO_INCREMENT values for the displayed tables
 --
 
 --
--- AUTO_INCREMENT a táblához `mapscores`
+-- AUTO_INCREMENT for table `characters` (AUTO_INCREMENT a táblához `characters`)
+--
+ALTER TABLE `characters`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `mapscores` (AUTO_INCREMENT a táblához `mapscores`)
 --
 ALTER TABLE `mapscores`
   MODIFY `record_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT a táblához `players`
+-- AUTO_INCREMENT for table `sessions` (AUTO_INCREMENT a táblához `sessions`)
 --
-ALTER TABLE `players`
-  MODIFY `character_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `sessions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT a táblához `users`
+-- AUTO_INCREMENT for table `users` (AUTO_INCREMENT a táblához `users`)
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- Megkötések a kiírt táblákhoz
+-- Constraints for the displayed tables
 --
 
 --
--- Megkötések a táblához `mapscores`
+-- Constraints for table `characters` (Megkötések a táblához `characters` táblához)
+--
+ALTER TABLE `characters`
+  ADD CONSTRAINT `characters_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `mapscores` (Megkötések a táblához `mapscores` táblához)
 --
 ALTER TABLE `mapscores`
   ADD CONSTRAINT `mapscores_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
 --
--- Megkötések a táblához `players`
+-- Constraints for table `sessions` (Megkötések a táblához `sessions` táblához)
 --
-ALTER TABLE `players`
-  ADD CONSTRAINT `players_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+ALTER TABLE `sessions`
+  ADD CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`character_id`) REFERENCES `characters` (`id`);
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- PROCEDURE: changeEmail (changeEmail)
+-- DESCRIPTION: Updates the email of a user in the users table. (Frissíti a felhasználó e-mail címét a users táblában.)
+-- PARAMETERS:
+--   - usernameIN: The username of the user. (A felhasználó felhasználóneve.)
+--   - emailIN: The new email to be set. (Az új e-mail cím, amely beállításra kerül.)
+--   - pwIN: The password of the user. (A felhasználó jelszava.)
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `changeEmail` (
+  IN `usernameIN` VARCHAR(100),
+  IN `emailIN` VARCHAR(100),
+  IN `pwIN` CHAR(128)
+)
+BEGIN
+  DECLARE temp INT;
+
+  SELECT COUNT(*) INTO temp FROM users WHERE nev = usernameIN AND jelszo = pwIN;
+
+  IF temp = 1 THEN
+    UPDATE users SET email = emailIN WHERE nev = usernameIN;
+    SELECT 'TRUE' AS 'result'; -- Successful insertion
+  ELSE
+    SELECT 'Nem található egyezés' AS 'result'; -- No match found
+  END IF;
+END //
+DELIMITER ;
+
+-- PROCEDURE: changePassword (changePassword)
+-- DESCRIPTION: Updates the password of a user in the users table. (Frissíti a felhasználó jelszavát a users táblában.)
+-- PARAMETERS:
+--   - oldPW: The old password of the user. (A felhasználó régi jelszava.)
+--   - newPW: The new password to be set. (Az új jelszó, amely beállításra kerül.)
+--   - usernameIN: The username of the user. (A felhasználó felhasználóneve.)
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `changePassword` (
+  IN `oldPW` CHAR(128),
+  IN `newPW` CHAR(128),
+  IN `usernameIN` VARCHAR(100)
+)
+BEGIN
+  DECLARE temp INT;
+
+  SELECT COUNT(*) INTO temp FROM users WHERE nev = usernameIN AND jelszo = oldPW;
+
+  IF temp = 1 THEN
+    UPDATE users SET jelszo = newPW WHERE nev = usernameIN;
+    SELECT 'TRUE' AS 'result'; -- Successful insertion
+  ELSE
+    SELECT 'Nem található egyezés' AS 'result'; -- No match found
+  END IF;
+END //
+DELIMITER ;
+
+-- PROCEDURE: changeUsername (changeUsername)
+-- DESCRIPTION: Updates the username of a user in the users table. (Frissíti a felhasználó felhasználónevét a users táblában.)
+-- PARAMETERS:
+--   - oldUsername: The old username of the user. (A felhasználó régi felhasználóneve.)
+--   - pwIN: The password of the user. (A felhasználó jelszava.)
+--   - newUsername: The new username to be set. (Az új felhasználónév, amely beállításra kerül.)
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `changeUsername` (
+  IN `oldUsername` VARCHAR(100),
+  IN `pwIN` CHAR(128),
+  IN `newUsername` VARCHAR(100)
+)
+BEGIN
+  DECLARE temp INT;
+
+  SELECT COUNT(*) INTO temp FROM users WHERE nev = oldUsername AND jelszo = pwIN;
+
+  IF temp = 1 THEN
+    UPDATE users SET nev = newUsername WHERE nev = oldUsername;
+    SELECT 'TRUE' AS 'result'; -- Successful insertion
+  ELSE
+    SELECT 'Nem található egyezés' AS 'result'; -- No match found
+  END IF;
+END //
+DELIMITER ;
+
+-- PROCEDURE: createCharacter (createCharacter)
+-- DESCRIPTION: Creates a new character for a user in the characters table. (Létrehoz egy új karaktert a felhasználó számára a characters táblában.)
+-- PARAMETERS:
+--   - id_user: The ID of the user. (A felhasználó azonosítója.)
+--   - result: The output parameter to store the result of the operation. (A művelet eredményének tárolására szolgáló kimeneti paraméter.)
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `createCharacter` (
+  IN `id_user` INT(11),
+  OUT `result` VARCHAR(100)
+)
+BEGIN
+  DECLARE temp INT;
+  SELECT COUNT(*) INTO temp FROM characters WHERE user_id = id_user;
+  IF temp = 0 THEN
+    INSERT INTO characters (user_id, class, health, equipped, acquired, currency, exp, stage)
+    VALUES (id_user, "ranger", 100, '{MB1 : "Shock Arrow", MB2 : "Shock Roller"}' ,'{"Shock Arrow", "Shock Roller"}',0,0,0);
+    SELECT 'TRUE' as 'result'; -- Successful insertion
+  ELSE
+    SELECT 'Már van karakter a felhasználónak' as 'result' ; -- User already has a character
+  END IF;
+END //
+DELIMITER ;
+
+-- PROCEDURE: getAllMapScores (getAllMapScores)
+-- DESCRIPTION: Retrieves all map scores from the mapscores table. (Visszaadja az összes térkép pontszámot a mapscores táblából.)
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllMapScores` ()
+BEGIN
+  SELECT map_id, user_id, map_time, health, score FROM mapscores;
+END //
+DELIMITER ;
+
+-- PROCEDURE: getCharacterData (getCharacterData)
+-- DESCRIPTION: Retrieves character data based on the provided token from the characters table. (Visszaadja a karakteradatokat a megadott token alapján a characters táblából.)
+-- PARAMETERS:
+--   - tokenInput: The token used to identify the session. (A munkamenet azonosítására használt token.)
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getCharacterData` (IN `tokenInput` INT(11))
+BEGIN
+  SELECT * FROM characters WHERE id IN (
+    SELECT character_id FROM sessions WHERE token = tokenInput
+  );
+END //
+DELIMITER ;
+
+-- PROCEDURE: getMapScores (getMapScores)
+-- DESCRIPTION: Retrieves map scores for a specific map from the mapscores table. (Visszaadja a térkép pontszámait egy adott térképről a mapscores táblából.)
+-- PARAMETERS:
+--   - mapID: The ID of the map. (A térkép azonosítója.)
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getMapScores` (IN `mapID` INT)
+BEGIN
+  SELECT user_id, map_time, health, score FROM mapscores WHERE map_id = mapID;
+END //
+DELIMITER ;
+
+-- PROCEDURE: getPlayerAllMapScores (getPlayerAllMapScores)
+-- DESCRIPTION: Retrieves all map scores for a specific player from the mapscores table. (Visszaadja az összes térkép pontszámát egy adott játékosnak a mapscores táblából.)
+-- PARAMETERS:
+--   - userID: The ID of the player. (A játékos azonosítója.)
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getPlayerAllMapScores` (IN `userID` INT)
+BEGIN
+  SELECT map_id, map_time, health, score FROM mapscores WHERE user_id = userID;
+END //
+DELIMITER ;
+
+-- PROCEDURE: getPlayerMapScores (getPlayerMapScores)
+-- DESCRIPTION: Retrieves map scores for a specific player and map from the mapscores table. (Visszaadja a térkép pontszámait egy adott játékosnak és térképnek a mapscores táblából.)
+-- PARAMETERS:
+--   - mapID: The ID of the map. (A térkép azonosítója.)
+--   - userID: The ID of the player. (A játékos azonosítója.)
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getPlayerMapScores` (IN `mapID` INT, IN `userID` INT)
+BEGIN
+  SELECT health, map_time, score FROM mapscores WHERE map_id = mapID AND user_id = userID;
+END //
+DELIMITER ;
+
+-- PROCEDURE: registrateUser (registrateUser)
+-- DESCRIPTION: Registers a new user in the users table. (Regisztrál egy új felhasználót a users táblában.)
+-- PARAMETERS:
+--   - emailIN: The email of the user. (A felhasználó e-mail címe.)
+--   - usernameIN: The username of the user. (A felhasználó felhasználóneve.)
+--   - passwordIN: The password of the user. (A felhasználó jelszava.)
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `registrateUser` (
+  IN `emailIN` VARCHAR(100),
+  IN `usernameIN` VARCHAR(100),
+  IN `passwordIN` CHAR(128)
+)
+BEGIN
+  DECLARE userCount INT;
+
+  SELECT COUNT(*) INTO userCount FROM users WHERE nev = usernameIN OR email = emailIN;
+
+  IF userCount = 0 THEN
+    INSERT INTO users (nev, jelszo, email) VALUES (usernameIN, passwordIN, emailIN);
+    SELECT 'TRUE' AS isDone;
+  ELSE
+    SELECT 'ERROR' AS isDone;
+  END IF;
+END //
+DELIMITER ;
+
+-- PROCEDURE: updateCharacterData (updateCharacterData)
+-- DESCRIPTION: Updates the health of a character based on the provided token in the characters table. (Frissíti a karakter egészségét a megadott token alapján a characters táblában.)
+-- PARAMETERS:
+--   - tokenInput: The token used to identify the session. (A munkamenet azonosítására használt token.)
+--   - healthInput: The new health value to be set. (Az új egészségérték, amely beállításra kerül.)
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateCharacterData` (IN `tokenInput` INT(11), IN `healthInput` INT(11))
+BEGIN
+  UPDATE characters SET health = healthInput WHERE id IN (
+    SELECT character_id FROM sessions WHERE token = tokenInput
+  );
+  
+    SELECT "TRUE" as 'result';
+END //
+DELIMITER ;
+
+-- PROCEDURE: uploadMapScore (uploadMapScore)
+-- DESCRIPTION: Uploads a new map score to the mapscores table. (Feltölt egy új térkép pontszámot a mapscores táblába.)
+-- PARAMETERS:
+--   - userID: The ID of the user. (A felhasználó azonosítója.)
+--   - mapID: The ID of the map. (A térkép azonosítója.)
+--   - healthIN: The health value achieved in the map. (A térképen elért egészségérték.)
+--   - maptimeIN: The time taken to complete the map. (A térkép befejezéséhez szükséges idő.)
+--   - scoresIN: The score achieved in the map. (A térképen elért pontszám.)
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `uploadMapScore` (
+  IN `userID` INT(11),
+  IN `mapID` INT(100),
+  IN `healthIN` INT,
+  IN `maptimeIN` TIME,
+  IN `scoresIN` INT
+)
+BEGIN
+  INSERT INTO mapscores (map_id, user_id, map_time, health, score)
+  VALUES (mapID, userID, maptimeIN, healthIN, scoresIN);
+  SELECT "TRUE" as 'result';
+END //
+DELIMITER ;
+
+-- PROCEDURE: validateLogin (validateLogin)
+-- DESCRIPTION: Validates the login credentials of a user in the users table. (Ellenőrzi a felhasználó bejelentkezési adatait a users táblában.)
+-- PARAMETERS:
+--   - usernameIN: The username of the user. (A felhasználó felhasználóneve.)
+--   - passwordIN: The password of the user. (A felhasználó jelszava.)
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `validateLogin` (
+  IN `usernameIN` VARCHAR(100),
+  IN `passwordIN` CHAR(128)
+)
+BEGIN
+  SELECT CASE WHEN EXISTS(
+    SELECT nev, jelszo FROM users WHERE nev = usernameIN AND jelszo = passwordIN
+  )
+  THEN 'TRUE'
+  ELSE 'FALSE'
+  END AS 'isValid';
+END //
+DELIMITER ;
