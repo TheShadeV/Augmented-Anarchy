@@ -26,11 +26,11 @@ public class StageChecker : MonoBehaviour
         {
             stageTime += Time.deltaTime;
         }
-        if(enemiesLeft.Length > 0)
+        if (enemiesLeft.Length > 0)
         {
             enemiesLeft = GameObject.FindGameObjectsWithTag("Enemy");
         }
-        if(enemiesLeft.Length == 0 && isTimerRunning)
+        if (enemiesLeft.Length == 0 && isTimerRunning)
         {
             isTimerRunning = false;
             Debug.Log("Final Time: " + stageTime + " seconds");
@@ -40,8 +40,8 @@ public class StageChecker : MonoBehaviour
     private void UpdateScores()
     {
         endScreen.SetActive(true);
-        endScreen.GetComponent<GetScore>().setUp();
-        
+        //endScreen.GetComponent<GetScore>().setUp();
+
     }
     public float getTime()
     {

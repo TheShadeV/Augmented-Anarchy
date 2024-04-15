@@ -8,7 +8,8 @@ using TMPro;
 
 public class ApiRequestExample : MonoBehaviour
 {
-    private const string apiUrl = "http://localhost/reg4/backend/ApiRequest.php";
+    private const string apiUrl = "http://localhost/Augmented-Anarchy/backend/ApiRequest.php";
+    public Token token;
 
     void Start()
     {
@@ -23,7 +24,7 @@ public class ApiRequestExample : MonoBehaviour
     {
 
         Transform StartMenu = GameObject.Find("Start-Menu").transform;
-        if(method == "login")
+        if (method == "login")
         {
             string[] Data = getLoginData();
             if (Data[0] != "ERROR")
@@ -32,7 +33,7 @@ public class ApiRequestExample : MonoBehaviour
                 string password = Data[1];
 
                 WWWForm form = new WWWForm();
-                form.AddField("mode","login");
+                form.AddField("mode", "login");
                 form.AddField("username", username);
                 form.AddField("password", password);
 
@@ -49,11 +50,12 @@ public class ApiRequestExample : MonoBehaviour
                         Debug.Log("Sikeres kérés!");
                         Debug.Log("Válasz: " + www.downloadHandler.text);
 
-                        bool isResponseTrue = www.downloadHandler.text.Replace("\"","").ToLower() == "true";
+                        bool isResponseTrue = www.downloadHandler.text.Replace("\"", "").ToLower() == "true";
                         Debug.Log("A válasz true vagy false? " + isResponseTrue);
 
                         if (isResponseTrue)
                         {
+                            token.setToken(1234);
                             GameObject MainMenu = StartMenu.Find("MainMenu").gameObject;
                             GameObject Login_Screen = StartMenu.Find("Login_Screen").gameObject;
 
@@ -68,7 +70,7 @@ public class ApiRequestExample : MonoBehaviour
                 }
             }
         }
-        else if(method == "register")
+        else if (method == "register")
         {
             string[] Data = getRegistrationData();
             if (Data[0] != "ERROR")
@@ -76,13 +78,13 @@ public class ApiRequestExample : MonoBehaviour
                 string email = Data[0];
                 string username = Data[1];
                 string password = Data[2];
-                
+
                 WWWForm form = new WWWForm();
                 form.AddField("mode", "register");
                 form.AddField("email", email);
                 form.AddField("username", username);
                 form.AddField("password", password);
-                
+
                 using (UnityWebRequest www = UnityWebRequest.Post(apiUrl, form))
                 {
                     yield return www.SendWebRequest();
@@ -103,12 +105,13 @@ public class ApiRequestExample : MonoBehaviour
 
                         if (isResponseTrue)
                         {
+                            token.setToken(1234);
                             GameObject MainMenu = StartMenu.Find("MainMenu").gameObject;
                             GameObject Login_Screen = StartMenu.Find("Register_Screen").gameObject;
 
                             MainMenu.SetActive(true);
                             Login_Screen.SetActive(false);
-                            
+
 
                         }
                         else
@@ -119,7 +122,7 @@ public class ApiRequestExample : MonoBehaviour
                 }
             }
 
-            
+
         }
 
     }
@@ -165,14 +168,14 @@ public class ApiRequestExample : MonoBehaviour
         string username = LoginScreen.Find("Username Fields").Find("Username").gameObject.GetComponent<TMP_InputField>().text;
         string password = ComputeSha512Hash(LoginScreen.Find("Password Fields").Find("Password").gameObject.GetComponent<TMP_InputField>().text);
 
-        if(username != "" || password != "")
+        if (username != "" || password != "")
         {
-            return  new string[] { username, password };
+            return new string[] { username, password };
         }
         else
         {
             showError("Töltsön ki minden mezőt!");
-            return new string[] {"ERROR"};
+            return new string[] { "ERROR" };
         }
     }
 
@@ -189,22 +192,22 @@ public class ApiRequestExample : MonoBehaviour
         string passwordField = ComputeSha512Hash(RegisterScreen.Find("Password Fields").Find("Password").gameObject.GetComponent<TMP_InputField>().text);
         string password_confirmField = ComputeSha512Hash(RegisterScreen.Find("Password Confirm Fields").Find("Password_Confirm").gameObject.GetComponent<TMP_InputField>().text);
 
-        if(emailField != "" && usernameField != "" && passwordField != "" && password_confirmField != "")
+        if (emailField != "" && usernameField != "" && passwordField != "" && password_confirmField != "")
         {
-            if(password_confirmField == passwordField)
+            if (password_confirmField == passwordField)
             {
-                return new string[] {emailField,usernameField, passwordField};
+                return new string[] { emailField, usernameField, passwordField };
             }
             else
             {
                 showError("A két jelszó nem egyezik!");
-                return new string[] {"ERROR"};
+                return new string[] { "ERROR" };
             }
         }
         else
         {
             showError("Töltsön ki minden mezőt!");
-            return new string[] {"ERROR"}; 
+            return new string[] { "ERROR" };
         }
     }
 

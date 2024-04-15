@@ -123,6 +123,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &11787475
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 11787476}
+  - component: {fileID: 11787477}
+  m_Layer: 0
+  m_Name: API
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &11787476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11787475}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.997341, y: -0.027689189, z: 5.177681}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11787477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11787475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 844e4e9693fd1454da0ca9915cd914fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  token: {fileID: 11400000, guid: bd25c860f1783d74597278f14390f9ad, type: 2}
 --- !u!1 &21669261
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,7 +225,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I'm sorry to hear that. Don't worry, from here on, it will be easier!
+  m_text: 'I''m sorry to hear that. Don''t worry, from here on, it will be easier!
+
+
+    Coming
+    Soon!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -4024,7 +4073,7 @@ MonoBehaviour:
   mb1Slider: {fileID: 1155110673}
   mb2Slider: {fileID: 605418209}
   dashSlider: {fileID: 2086754086}
-  playerController: {fileID: 0}
+  playerController: {fileID: 1723184087}
 --- !u!1 &203942346
 GameObject:
   m_ObjectHideFlags: 0
@@ -4689,7 +4738,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -78.0508, y: 22.3505}
+  m_AnchoredPosition: {x: -78.05078, y: 22.350525}
   m_SizeDelta: {x: 28.5254, y: 2.6752}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &420778355
@@ -4706,8 +4755,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 300
   currentHealth: 0
-  player: {fileID: 0}
-  playerController: {fileID: 0}
+  player: {fileID: 1723184084}
+  playerController: {fileID: 1723184087}
   mySlider: {fileID: 420778356}
 --- !u!114 &420778356
 MonoBehaviour:
@@ -6548,7 +6597,7 @@ BoxCollider2D:
   m_Offset: {x: 0.014077328, y: -0.0027932525}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.49430904, y: 0.013374947}
     oldSize: {x: 0.2, y: 0.37}
     newSize: {x: 0.48, y: 0.48}
     adaptiveTilingThreshold: 0.5
@@ -6704,7 +6753,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I see! I knew you had it in you!
+  m_text: 'I see! I knew you had it in you!
+
+
+    Coming Soon!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -7724,6 +7776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb631ffb05c54b4081331741e6bef14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  API: {fileID: 0}
 --- !u!19719996 &1085481887
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -20806,3 +20859,4 @@ SceneRoots:
   - {fileID: 2129226288}
   - {fileID: 618384380}
   - {fileID: 1541061431}
+  - {fileID: 11787476}

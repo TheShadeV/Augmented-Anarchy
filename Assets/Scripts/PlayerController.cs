@@ -32,16 +32,18 @@ public class PlayerController : MonoBehaviour
         totalHealth = maxHealth;
         isFreeze = false;
         freezeTime = 0.5f;
+
+        GameObject.Find("API").GetComponent<CharacterUpdater>().ApiRequest("getCharacterData");
     }
 
     private void Update()
     {
-        if(totalHealth <= 0)
+        if (totalHealth <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         updateCooldowns();
-        
+
         Console.WriteLine(isFreeze);
 
         moveInput.x = Input.GetAxisRaw("Horizontal");
@@ -93,7 +95,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetMouseButtonDown(1))
         {
-            if(spellTimers.ContainsKey("ShockRoller"))
+            if (spellTimers.ContainsKey("ShockRoller"))
             {
                 if (spellTimers["ShockRoller"] <= 0)
                 {
@@ -115,7 +117,7 @@ public class PlayerController : MonoBehaviour
 
                 Debug.Log(spellTimers["ShockRoller"]);
             }
-            
+
             isFreeze = true;
             rb2d.velocity = Vector2.zero;
         }
@@ -142,7 +144,7 @@ public class PlayerController : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.tag == "ExitArea")
+        if (col.gameObject.tag == "ExitArea")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
@@ -185,7 +187,7 @@ public class PlayerController : MonoBehaviour
     }
     private void updateCooldowns()
     {
-        if(spellTimers.Count == 0)
+        if (spellTimers.Count == 0)
         {
             return;
         }

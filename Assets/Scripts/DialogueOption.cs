@@ -20,7 +20,7 @@ public class DialogueOption : MonoBehaviour
         if (other.tag == "Player")
         {
             canOpenPopup = true;
-            
+
             Debug.Log("Bent vagy!");
         }
 
@@ -42,13 +42,13 @@ public class DialogueOption : MonoBehaviour
             PopUpWindow.gameObject.SetActive(true);
             Debug.Log("lenyomtad!");
         }
-        Debug.Log("Update method called");
-        if (canOpenPopup )
+        //Debug.Log("Update method called");
+        if (canOpenPopup)
         {
-            Debug.Log("Showing popup");
+            //Debug.Log("Showing popup");
             if (PopUpWindow != null)
             {
-              
+
             }
             else
             {
@@ -56,7 +56,7 @@ public class DialogueOption : MonoBehaviour
             }
         }
 
-        
+
     }
 }
 

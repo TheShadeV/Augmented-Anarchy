@@ -5,17 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitch : MonoBehaviour
 {
+    public GameObject API;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
+
         if (other.tag == "Player")
         {
-            LoadNextScene();
+            API.GetComponent<CharacterUpdater>().ApiRequest("updateCharacterData");
         }
     }
 
-    void LoadNextScene()
+    public void LoadNextScene()
     {
-       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

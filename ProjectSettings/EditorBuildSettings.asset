@@ -7,7 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
-    guid: 3d470b688afd29744a48804f96ea70f1
+    guid: 152d5d9afe44f9942af2b5eb2909e678
   - enabled: 1
     path: Assets/Scenes/Base.unity
     guid: eb808a8fb5e823641a698ad4d46dc1c7
@@ -23,7 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/City_01.unity
     guid: 27ce9c4b05c7a1944a3183e6ac7ce693
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CyberVoid.unity
     guid: 5ecfa6458383ea54cb25879c6cf1c3c6
   m_configObjects: {}
