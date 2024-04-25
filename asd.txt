@@ -1,0 +1,65 @@
+D. Remote
+B. Trello
+A. <hr>
+C. margin
+D. undefined
+b. 0,1,1,2,3,5,8
+A. maidenName()
+B. 1-5
+ SET
+D DISTINCT
+A. RAM és proc
+C. Vue
+A. React
+D. MongoDB
+D. Aszinkronkapcsoló
+C. jellemző
+A. Descendant class
+B. Azure
+A. Bingo
+D. Egységteszt
+
+
+A-2 B-4 C-1 D-3
+C. Folymatos Email
+ol
+170
+B. 19
+B. Nyilfüggvény
+D. const CurrentDate
+C. Ajánlott kereshető
+A. Egyedtipus
+10. Pirelli
+11. B. Kotlin Multiplatform Mobile
+12. D. Mustache
+13. click
+14. B. FOOT
+15. C. bool (false) C. false
+16. interface
+17. A. Dinamikus objektum
+18. IGAZ Drupal
+19. D. tesztelés
+20. B. túltesztelt terület
+
+
+1. D. commit
+2. A. Mindegyikhez van Trello
+3. B. border-radius
+4. nav
+5. C. onLoad
+6. getElementsByName
+7. C. Tartalmazzon tipusra utalást
+8. HAMIS Demeteres
+9. c. HAVING
+10. B. foreign key
+11. HAMIS A .NET alapú Android Studio
+12. A. DONE
+13. mvc
+14. C. Accept-Encoding
+15. D. Backbone
+16. konstruktor
+17. IGAZ Interfészek absztrakt osztályok
+18. B. A nyilt forráskodú
+19. C. egységteszt
+20. TDD
+
