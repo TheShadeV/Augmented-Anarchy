@@ -44,7 +44,7 @@
   <div class="container mt-5">
     <h1 class="text-center mt-3">Üdvözöljük ##FNEV##!</h1>
   </div>
-  <div class="container mt-5">
+  <!-- <div class="container mt-5">
     <div class="table-responsive">
       <table class="table table-hover table-bordered table-secondary">
         <thead>
@@ -58,9 +58,9 @@
         <tbody class="table-group-divider">
           <tr>
             <th scope="row">1</th>
-            <td class="table-danger">##KILLS##</td>
-            <td class="table-warning">##ELAPSEDTIME##</td>
-            <td class="table-primary">##BESTTIME##</td>
+            <td class="table-danger">##CLASS##</td>
+            <td class="table-warning">##HEALTH##</td>
+            <td class="table-primary">##EQUIPPED##</td>
           </tr>
           <tr>
             <th scope="row">2</th>
@@ -77,6 +77,9 @@
         </tbody>
       </table>
     </div>
+  </div> -->
+  <div class="container mt-5 mb-5">
+    <h1 class="text-center mt-3">Ranglista</h1>
   </div>
   <script src="../frontend/js/inactivityCounter.js"></script>
 </body>

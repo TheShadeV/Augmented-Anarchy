@@ -10,8 +10,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   color: #fff;
-  height: 100vh;
-  overflow: hidden;
+  height: auto;
 }
 
 .logo {

@@ -67,6 +67,11 @@ body {
   border-radius: 5px;
 }
 
+.btn:hover {
+  color: red !important;
+  background-color: lightblue !important;
+}
+
 .btn:focus {
   outline: none;
 }
