@@ -5,18 +5,107 @@ define('DB_PASS', '');
 define('DB_DBASE', 'augmentedanarchy');
 
 /**
- * Connect to the database
- * @return mysqli|false    The MySQL connection resource or false if there was an error (A MySQL kapcsolat erőforrása vagy hamis, ha hiba történt)
+ * Függvény a MySQL-kapcsolat kialakításához
+ * @param mysqli $kapcsolat   A MySQL-kapcsolat erőforrása
+ * @return $kapcsolat
  */
 function csatlakozas()
 {
     $kapcsolat = mysqli_connect('localhost', DB_USER, DB_PASS, DB_DBASE);
-    if (!$kapcsolat) {
-        die('Nem sikerült csatlakozni az adatbázishoz!');
-    }
+    if (!$kapcsolat)
+        die("Adatbázis hiba: " . mysqli_connect_error());
     return $kapcsolat;
 }
 
+/**
+ * Összes adat lekérdezése az adatbázisból
+ * @param mysqli $kapcsolat         A MySQL-kapcsolat erőforrása
+ * @param string $sql               A lekérdezés parancsa
+ * @return mysqli_result $query     A kérdések listája tömbként
+ */
+function lekerdezes($kapcsolat)
+{
+    $sql = 'SELECT * FROM users';
+    $query = mysqli_query($kapcsolat, $sql);
+    if (!$query)
+        die("Adatbázis-hiba: " . mysqli_error($kapcsolat));
+    return $query;
+}
+
+/**
+ * Új felhasználó rögzítése az adatbázisban
+ * @param mysqli kapcsolat  A MySQL-kapcsolat erőforrása
+ * @param array $user       A felhasználói adatokat tartalmazó tömb
+ * @param string $sql       A lekérdezés parancsa
+ * @return boolean          Sikeres volt-e a rögzítés
+ */
+function feltolt($kapcsolat, $user)
+{
+    $sql = 'INSERT INTO users(nev, email, jelszo) VALUES (
+            "' . $user["fnev"] .
+        '", "' . $user["email"] .
+        '", "' . hash('sha512', $user["jelszo"]) . '")';
+    $query = mysqli_query($kapcsolat, $sql);
+    if (!$query)
+        die("Adatbázis-hiba: " . mysqli_error($kapcsolat));
+    return true;
+}
+
+/**
+ * A felhasználó nevének és jelszavának lekérése
+ * @param mysqli $kapcsolat     A MySQL-kapcsolat erőforrása
+ * @param string $usernev       A felhasználónév
+ * @param string $jelszo        A SHA256-al kódolt jelszó
+ * @param string $sql           A lekérdezés parancsa
+ * @return boolean              Sikeres volt-e a lekérdezés
+ */
+function egy_leker($kapcsolat, $usernev, $jelszo)
+{
+    $sql = "SELECT nev, jelszo FROM users WHERE nev = '{$usernev}' AND jelszo = '{$jelszo}'";
+    // "{$usernev}" === "'.$usernev.'"
+    $query = mysqli_query($kapcsolat, $sql);
+    if (!$query)
+        die("Adatbázis-hiba: " . mysqli_error($kapcsolat));
+    if (mysqli_num_rows($query) > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * A felhasználó adatait kéri le
+ * @param mysqli $kapcsolat         A MySQL-kapcsolat erőforrása
+ * @param string $usernev           A felhasználó felhasználóneve
+ * @return mysqli_result $query     A felhasználó adatait tartalmazo MySQL-erőforrás
+ */
+function user_leker($kapcsolat, $usernev)
+{
+    $sql = 'SELECT * FROM users WHERE nev = "' . $usernev . '"';
+    // "{$usernev}" === "'.$usernev.'"
+    $query = mysqli_query($kapcsolat, $sql);
+    if (!$query)
+        die("Adatbázis-hiba: " . mysqli_error($kapcsolat));
+    return $query;
+}
+
+/**
+ * A felhasználó profiljának lekérése
+ * @param mysqli $kapcsolat       A MySQL-kapcsolat erőforrása
+ * @param number $id              A felhasználó azonosítója
+ * @return mysqli_result $query   A felhasználó MySQLI-erőforrása
+ * @return number                 0, ha a felhasználó nem létezik
+ */
+function profil_leker($kapcsolat, $id)
+{
+    $sql = 'SELECT * FROM users WHERE id = "' . $id . '"';
+    // "{$usernev}" === "'.$usernev.'"
+    $query = mysqli_query($kapcsolat, $sql);
+    if (!$query) {
+        die("Adatbázis-hiba: " . mysqli_error($kapcsolat));
+    }
+    return $query;
+}
 
 /**
  * Change email of a user
@@ -26,6 +115,43 @@ function csatlakozas()
  * @param string $pwIN            The password of the user (A felhasználó jelszava)
  * @return string                 The result of the operation (A művelet eredménye)
  */
+
+ /**
+ * Felhasználó játékbéli eredményeinek lekérdezése
+ * @param mysqli $kapcsolat   A MySQL-kapcsolat erőforrása
+ * @param string $usernev A lekérdezett felhasználó neve
+ * @return mysqli_result|false A lekérdezés eredménye vagy false, ha hiba történt
+ */
+function eredmenyek_lekerdezese($kapcsolat, $usernev)
+{
+    $sql = "SELECT class, health, equipped, acquired, currency, exp, stage FROM characters
+            WHERE user_id = (SELECT id FROM users WHERE nev = ?)";
+
+    $stmt = mysqli_prepare($kapcsolat, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $usernev);
+    mysqli_stmt_execute($stmt);
+    $eredmenyek = mysqli_stmt_get_result($stmt);
+    mysqli_stmt_close($stmt);
+
+    return $eredmenyek;
+}
+
+function score_lekerdezese($kapcsolat)
+{
+    $sql = "SELECT u.nev AS felhasznalo_nev, MAX(ms.score) AS legmagasabb_pontszam
+    FROM mapscores ms
+    JOIN users u ON ms.user_id = u.id
+    GROUP BY ms.user_id
+    ORDER BY legmagasabb_pontszam DESC;";
+
+    $stmt = mysqli_prepare($kapcsolat, $sql);
+    mysqli_stmt_execute($stmt);
+    $eredmenyek = mysqli_stmt_get_result($stmt);
+    mysqli_stmt_close($stmt);
+
+    return $eredmenyek;
+}
+
 function changeEmail($kapcsolat, $usernameIN, $emailIN, $pwIN)
 {
     $sql = "CALL changeEmail('$usernameIN','$emailIN','$pwIN')";
@@ -76,8 +202,7 @@ function createCharacter($kapcsolat, $id_user)
 {
     $sql = "CALL createCharacter($id_user)";
     $query = mysqli_query($kapcsolat, $sql);
-    $result = mysqli_fetch_assoc($query);
-    return $result['result'];
+    return $query;
 }
 
 /**
@@ -89,9 +214,9 @@ function getAllMapScores($kapcsolat)
 {
     $sql = "CALL getAllMapScores()";
     $query = mysqli_query($kapcsolat, $sql);
-    $result = mysqli_fetch_assoc($query);
-    return $result;
+    return $query;
 }
+
 /**
  * Get character data for a user
  * @param mysqli $kapcsolat       The MySQL connection resource (A MySQL kapcsolat erőforrása)
@@ -102,8 +227,7 @@ function getCharacterData($kapcsolat, $tokenInput)
 {
     $sql = "CALL getCharacterData($tokenInput)";
     $query = mysqli_query($kapcsolat, $sql);
-    $result = mysqli_fetch_assoc($query);
-    return $result;
+    return $query;
 }
 
 /**
@@ -116,8 +240,7 @@ function getMapScores($kapcsolat, $mapID)
 {
     $sql = "CALL getMapScores($mapID)";
     $query = mysqli_query($kapcsolat, $sql);
-    $result = mysqli_fetch_assoc($query);
-    return $result;
+    return $query;
 }
 
 /**
@@ -130,12 +253,9 @@ function getPlayerAllMapScores($kapcsolat, $userID)
 {
     $sql = "CALL getPlayerAllMapScores($userID)";
     $query = mysqli_query($kapcsolat, $sql);
-    $result = array(); 
-    while ($row = $query->fetch_assoc()) {
-        $result[] = $row; 
-    }
-    return $result;
+    return $query;
 }
+
 /**
  * Get map scores for a specific player and map
  * @param mysqli $kapcsolat       The MySQL connection resource (A MySQL kapcsolat erőforrása)
@@ -147,11 +267,7 @@ function getPlayerMapScores($kapcsolat, $mapID, $userID)
 {
     $sql = "CALL getPlayerMapScores($mapID, $userID)";
     $query = mysqli_query($kapcsolat, $sql);
-    $result = array(); 
-    while ($row = $query->fetch_assoc()) {
-        $result[] = $row; 
-    }
-    return $result;
+    return $query;
 }
 
 /**
@@ -181,8 +297,7 @@ function updateCharacterData($kapcsolat, $tokenInput, $healthInput)
 {
     $sql = "CALL updateCharacterData($tokenInput, $healthInput)";
     $query = mysqli_query($kapcsolat, $sql);
-    $result = mysqli_fetch_assoc($query);
-    return $result['result'];
+    return $query;
 }
 
 /**
@@ -199,8 +314,7 @@ function uploadMapScore($kapcsolat, $userID, $mapID, $healthIN, $maptimeIN, $sco
 {
     $sql = "CALL uploadMapScore($userID, $mapID, $healthIN, '$maptimeIN', $scoresIN)";
     $query = mysqli_query($kapcsolat, $sql);
-    $result = mysqli_fetch_assoc($query);
-    return $result['result'];
+    return $query;
 }
 
 /**

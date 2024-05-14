@@ -24,11 +24,12 @@ if (!isset($_POST['mode']) || $_POST['mode'] != 'reg') {
     } else {
         $update = feltolt($kapcsolat, $_POST);
         if ($update) {
-            $html = file_get_contents("../frontend/templates/index.html");
+            $html = file_get_contents("../frontend/login/index.html");
             $html = str_replace("##SIKER##", "Sikeres regisztráció!", $html);
             $html = str_replace("##ERROR##", "", $html);
         }
     }
 }
 echo $html;
+echo $error;
 ?>

@@ -16,15 +16,15 @@ if (isset($_POST["action"]) && $_POST["action"] == "login") {
         $html = str_replace("##FNEV##", $usernev, $html);
 
         $eredmenyek = eredmenyek_lekerdezese($kapcsolat, $usernev);
-        mysqli_close($kapcsolat);
 
         if ($eredmenyek) {
             $eredmeny_sor = mysqli_fetch_assoc($eredmenyek);
 
             if ($eredmeny_sor !== null) {
-                $html = str_replace("##KILLS##", $eredmeny_sor['kills'], $html);
-                $html = str_replace("##ELAPSEDTIME##", $eredmeny_sor['elapsedTime'], $html);
-                $html = str_replace("##BESTTIME##", $eredmeny_sor['bestTime'], $html);
+                $html = str_replace("##CLASS##", $eredmeny_sor['class'], $html);
+                $html = str_replace("##HEALTH##", $eredmeny_sor['health'], $html);
+                $equipped = json_decode($eredmeny_sor['equipped'], true);
+                $html = str_replace("##EQUIPPED##", $equipped['MB1'], $html);
 
                 mysqli_free_result($eredmenyek);
             } else {
@@ -34,6 +34,26 @@ if (isset($_POST["action"]) && $_POST["action"] == "login") {
             }
 
             echo $html;
+
+            echo "<table class='container table table-striped table-dark table-responsive' border='1'>";
+            echo "<tr><th>Rang</th><th>Felhasználó neve</th><th>Legmagasabb pontszám</th></tr>";
+            $score = score_lekerdezese($kapcsolat);
+            $rank = 1;
+            while ($sor = mysqli_fetch_assoc($score)) {
+                echo "<tr class='rank-row'>";
+                echo "<td>" . $rank . "</td>";
+                echo "<td";
+                if ($sor["felhasznalo_nev"] == $usernev) {
+                    echo " style='font-weight: bold; background-color: #cd7f32;'";
+                }
+                echo ">" . $sor["felhasznalo_nev"] . "</td>";
+                echo "<td>" . $sor["legmagasabb_pontszam"] . "</td>";
+                echo "</tr>";
+                $rank++;
+            }
+            echo "</table>";
+
+            mysqli_close($kapcsolat);
         }
     } else {
         $html = file_get_contents('../frontend/templates/index.tpl');
