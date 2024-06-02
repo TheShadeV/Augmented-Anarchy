@@ -31,5 +31,4 @@ if (!isset($_POST['mode']) || $_POST['mode'] != 'reg') {
     }
 }
 echo $html;
-echo $error;
 ?>
