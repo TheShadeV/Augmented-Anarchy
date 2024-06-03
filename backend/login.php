@@ -44,7 +44,7 @@ if (isset($_POST["action"]) && $_POST["action"] == "login") {
                 echo "<td>" . $rank . "</td>";
                 echo "<td";
                 if ($sor["felhasznalo_nev"] == $usernev) {
-                    echo " style='font-weight: bold; background-color: #cd7f32;'";
+                    echo " style='font-weight: bold; color:red;'";
                 }
                 echo ">" . $sor["felhasznalo_nev"] . "</td>";
                 echo "<td>" . $sor["legmagasabb_pontszam"] . "</td>";
