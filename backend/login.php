@@ -56,9 +56,7 @@ if (isset($_POST["action"]) && $_POST["action"] == "login") {
             mysqli_close($kapcsolat);
         }
     } else {
-        $html = file_get_contents('../frontend/templates/index.tpl');
-        $html = str_replace("##SIKER##", '', $html);
-        $html = str_replace("##ERROR##", 'Hibás felhasználónév vagy jelszó!', $html);
+        $html = file_get_contents('../frontend/login/index.html');
         echo $html;
     }
 }
