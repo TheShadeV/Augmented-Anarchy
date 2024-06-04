@@ -20,19 +20,6 @@ if (isset($_POST["action"]) && $_POST["action"] == "login") {
         if ($eredmenyek) {
             $eredmeny_sor = mysqli_fetch_assoc($eredmenyek);
 
-            if ($eredmeny_sor !== null) {
-                $html = str_replace("##CLASS##", $eredmeny_sor['class'], $html);
-                $html = str_replace("##HEALTH##", $eredmeny_sor['health'], $html);
-                $equipped = json_decode($eredmeny_sor['equipped'], true);
-                $html = str_replace("##EQUIPPED##", $equipped['MB1'], $html);
-
-                mysqli_free_result($eredmenyek);
-            } else {
-                $html = str_replace("##KILLS##", "Még nincs eredménye", $html);
-                $html = str_replace("##ELAPSEDTIME##", "Még nincs eredménye", $html);
-                $html = str_replace("##BESTTIME##", "Még nincs eredménye", $html);
-            }
-
             echo $html;
 
             echo "<table class='container table table-striped table-dark table-responsive' border='1'>";
